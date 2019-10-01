@@ -1,0 +1,86 @@
+<div>
+
+
+  <div class="stunning-header">
+
+	
+    <!-- Header Standard Landing  -->
+    
+    <div class="particles">
+      <particles [style]="myStyle" [width]="width" [height]="height" [params]="myParams"></particles>
+    </div>
+  
+  <div class="header--standard header--standard-landing">
+    <div class="container">
+      <div class="header--standard-wrap pt-2 pb-2">
+  
+        <a [routerLink]="['']"class="logo">
+          <div class="img-wrap">
+            <img src="/assets/img/ecoworld.png" class="eco-logo">
+          </div>
+          <div class="title-block">
+            <!-- <div class="sub-title">A Digitalized Economy</div> -->
+          </div>
+        </a>
+  
+        <div style="position: absolute; right: 1px;">
+            <button mat-button [matMenuTriggerFor]="menu" class="bg-primary">
+                <svg class="olymp-menu-icon" style="fill:#fff;"><use xlink:href="/assets/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item  [routerLink]="['']" routerLinkActive="router-link-active"  >Home</button>
+                <button mat-menu-item  [routerLink]="['/about']" routerLinkActive="router-link-active">About ECO</button>
+                <button mat-menu-item  [routerLink]="['/share-problems']" routerLinkActive="router-link-active">Share your problem</button>
+                <button mat-menu-item  [routerLink]="['/problems']" routerLinkActive="router-link-active">View Problems</button>
+                <button mat-menu-item  *ngIf="(user | async)" (click)="forgetMe()">Forget me</button>
+            </mat-menu>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+    
+    <!-- ... end Header Standard Landing  -->
+    <div class="header-spacer--standard"></div>
+  
+    <div class="stunning-header-content text-dark">
+      <h1 class="stunning-header-title">Page could not be found</h1>
+      <ul class="breadcrumbs">
+        <li class="breadcrumbs-item active">
+          <span>404 Error</span>
+        </li>
+      </ul>
+    </div>
+  
+  </div>
+  
+  <!-- End Stunning header -->
+  
+  
+  <section class="pt-5 bg-light" style="height: 100vh">
+    <div class="container">
+      <div class="row">
+        <div class="col col-xl-6 m-auto col-lg-6 col-md-12 col-sm-12 col-12">
+          <div class="page-404-content">
+            <div class="crumina-module crumina-heading align-center">
+              <p class="heading-text">Sorry! The page you were looking for has been moved or doesn’t exist.
+                If you like, you can return to our homepage, or if the problem persists, send us an email to: 
+                <a href="mailto:info@newecopeople.com?subject=Page%20not%20found%20Error">info@newecopeople.com</a>
+              </p>
+            </div>
+  
+            
+            <button mat-raised-button color="primary" [routerLink]="['']"  class="btn-lg">Go to Homepage</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+
+
+
+</div>

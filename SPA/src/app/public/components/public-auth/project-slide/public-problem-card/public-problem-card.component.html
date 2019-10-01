@@ -1,0 +1,98 @@
+
+	<div @fade id="newsfeed-items-grid" *ngIf="problem._?.id">
+		<div class="ui-block">
+					
+			<!-- Post -->
+			
+			<article class="hentry post has-post-thumbnail thumb-full-width">
+			
+				<app-problem-heading-info [problem]="problem" ></app-problem-heading-info>
+				
+	
+				<div class="post-video" style="cursor: pointer" (click)="viewProblem($event)">
+					<div class="content bg-light">
+	
+						<div class="with-pic row" *ngIf="(problem._.photos.length > 0)">
+							<div class="col col-12 col-sm-12 col-md-6 img-details">
+								<img [src]="problem._.photos[0].url" class="img-fluid" alt="photo">
+								<span class="h2 bg-white px-2 text-dark more-image" *ngIf="(problem._.photos.length > 1)">
+									<mat-icon>collections</mat-icon>
+								</span>
+							</div>
+							
+							
+
+							<div class="col col-12 col-sm-12 col-md-6">
+								<p>{{ truncate(problem._.description, 250) }}
+							</div>
+							
+							<!--  -->
+						</div>
+
+						<div class="ungoals">
+							<img [src]="'/assets/img/ungoals/'+ replaceSpace(problem._.ecoUn) +'.png'" class="ungoals-pic">
+						</div>
+	
+						<div class="without-pic" *ngIf="!(problem._.photos.length > 0)">
+							<div class="col col-12">
+								<p>{{ truncate(problem._.description, 400) }}
+								</p>
+							</div>
+						</div>
+	
+					</div>
+				</div>
+	
+			
+				<div class="border-top my-4 pt-2">
+			
+					<a disable="true" href="#" (click)="likeProblem($event)" class="post-add-icon inline-items float-left mr-3">
+						<mat-icon class="md-18 mr-1">pan_tool</mat-icon>
+						<span> {{ problem._.likes }} </span> <mat-icon *ngIf="likeLoader" class="pt-1 pl-1"><mat-spinner [diameter]="15" ></mat-spinner></mat-icon>
+					</a>
+
+					<!-- <a disable="true" href="#" (click)="viewProblem($event)" class="post-add-icon inline-items float-left mr-3">
+						<mat-icon class="md-18 mr-1">message</mat-icon>
+						<span> {{ problem._.comments }} </span> <mat-icon *ngIf="likeLoader" class="pt-1 pl-1"><mat-spinner [diameter]="15" ></mat-spinner></mat-icon>
+					</a> -->
+
+					<a disable="true" href="#" (click)="viewProblem($event)" class="post-add-icon inline-items float-left mr-3">
+						<mat-icon class="md-18 mr-1 rotate-180">wb_incandescent</mat-icon>							
+						<span> {{ problem._.ideas }} </span> <mat-icon *ngIf="likeLoader" class="pt-1 pl-1"><mat-spinner [diameter]="15" ></mat-spinner></mat-icon>
+					</a>
+	
+					<!-- <span class="post-add-icon inline-items" *ngIf="(problem._.photos.length > 0)">
+						<mat-icon class="pt-1">image</mat-icon> <span>{{ problem._.photos.length }}</span>
+					</span> -->
+			
+					<div class="comments-shared" *ngIf="problem._.projects && problem._.projects.length > 0">
+			
+						<a [href]="problem._.projects[0].webLink" target="_blank" class="post-add-icon inline-items float-right">
+							<svg class="olymp-share-icon"><use xlink:href="/assets/svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+							<!-- <span>{{ problem.projects?.length }}</span> -->
+						</a>
+					</div>
+			
+				</div>
+			
+			</article>
+			
+		</div>
+	
+		</div>
+		
+	
+		<!-- country: {name: "Australia"}
+		dateCreated: "2019-03-16T16:34:59.4590719"
+		description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni amet, numquam delectus maiores facilis dicta iste pariatur tempore non? Voluptas odit quibusdam rem laudantium maxime ipsum placeat quaerat veritatis non.↵Laudantium eum labore accusantium minus delectus reprehenderit dolore iusto vel neque cum, maxime mollitia dolores quo et veritatis corporis voluptatibus quod laborum magnam ad dicta quaerat qui, corrupti quia? Architecto.↵At pariatur ratione itaque quam laborum sed ea esse eveniet. Unde, provident perferendis ratione rerum vel quam numquam reiciendis ducimus ex quidem cumque similique itaque dignissimos nesciunt nostrum magni voluptate!↵Laboriosam reiciendis repellat quia dicta odit aperiam temporibus alias nobis. Dolorem, ea. Mollitia sint hic accusantium est praesentium exercitationem veritatis dignissimos tempora vel amet? Possimus quidem laboriosam soluta enim corporis.↵Quaerat iusto quod dolores similique qui sapiente repellat accusantium error laborum officiis, eum"
+		eco: "c"
+		ecoUn: "Quality Education"
+		ecoUnOther: null
+		ico: "o"
+		icoOther: null
+		id: "fa120226-fb5d-45fb-4b47-08d6aa2d7d0e"
+		likes: 0
+		photos: (3) [{…}, {…}, {…}]
+		projects: []
+		state: {name: "Balmain"}
+		user: null -->

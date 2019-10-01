@@ -1,0 +1,27 @@
+
+# Pull the Mirsoft sdk image
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2
+MAINTAINER Eco Team
+
+# install System.Drawing native dependencies
+RUN apt-get update \
+    && apt-get install -y --allow-unauthenticated \
+        libc6-dev \
+        libgdiplus \
+        libx11-dev \
+     && rm -rf /var/lib/apt/lists/*
+
+# Store files in the app folder (so cliche)
+WORKDIR /app
+COPY ./ ./
+
+# Restore all dotnet nuget packages
+RUN dotnet restore
+
+# expose port
+EXPOSE 5000
+
+# Set default command to RUN
+CMD ["dotnet", "watch", "run"]
+
+

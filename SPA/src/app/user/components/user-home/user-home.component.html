@@ -1,0 +1,45 @@
+
+
+
+
+
+
+<div class="d-flex" [ngClass]="{toggled: (mainMenu | async)}" id="wrapper" >
+
+
+	<!-- Fixed Sidebar Left -->
+	<app-user-left-sidebar></app-user-left-sidebar>
+	<!-- ... end Fixed Sidebar Left -->
+
+	<!-- Fixed Sidebar coming soon for chatting Right -->
+
+		<app-user-right-sidebar></app-user-right-sidebar>
+
+	<!-- ... end Fixed Sidebar Right-Responsive -->
+
+	<div class="page content-wrapper">
+		<!-- Start of header -->
+		<app-user-header></app-user-header>
+		<!-- End of header -->
+
+		<div class="container-fluid" >
+			
+			<!-- main content -->
+			<router-outlet></router-outlet>
+			<!-- End of main content -->
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+<a class="back-to-top" href="#">
+	<img src="/assets/svg-icons/back-to-top.svg" alt="arrow" class="back-icon">
+</a>
+	  

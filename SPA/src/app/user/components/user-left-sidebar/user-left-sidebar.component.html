@@ -1,0 +1,71 @@
+<!-- <div class="main-parent">
+		<div class="sub-parent" >
+				<div class="child"> -->
+					
+						<!-- <div class="card">
+								<div class="custom-card-header">
+									<h6>
+										<a [routerLink]="['/']" >
+											<img src="/assets/img/ecoworld.png" class="eco-logo" >
+											ECO WORLD
+										</a>
+									</h6>
+								</div>
+
+								<div class="spacer"></div>
+					
+								<div>
+									<ul class="your-profile-menu sidenav-menu">
+										<li fxLayout="row" fxLayoutAlign="start center" (click)="closeMainMenu()" >
+											<mat-icon class="md-36">close</mat-icon><span>Close menu</span>
+										</li>
+										<li>
+											<svg class="olymp-menu-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="OPEN MENU"><use xlink:href="/assets/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
+											<a href="28-YourAccount-PersonalInformation.html">Personal Information</a>
+										</li>
+										<li>
+											<a href="29-YourAccount-AccountSettings.html">Account Settings</a>
+										</li>
+										<li>
+											<a href="30-YourAccount-ChangePassword.html">Change Password</a>
+										</li>
+										<li>
+											<a href="31-YourAccount-HobbiesAndInterests.html">Hobbies and Interests</a>
+										</li>
+										<li>
+											<a href="32-YourAccount-EducationAndEmployement.html">Education and Employement</a>
+										</li>
+									</ul>
+								</div>
+	
+							</div> -->
+					
+							<div id="sidebar-wrapper">
+								<div class="bg-light border-right main-menu">
+									<div class="sidebar-heading bg-dark">
+										<a [routerLink]="['/']" (click)="closeMainMenu($event)">
+											<img src="/assets/img/ecoworld.png" class="eco-logo text-light"> ECO WORLD
+										</a>
+									</div>
+									<div class="list-group list-group-flush">
+										<a href="#" (click)="closeMainMenu($event)" class="list-group-item-custom list-group-item-action bg-light" fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="start center"> 
+											<mat-icon class="md-18">close</mat-icon> <span>Close Menu</span>
+										</a>
+										<a href="#" class="list-group-item-custom list-group-item-action bg-light" fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="start center">
+											<mat-icon class="md-18">assignment</mat-icon> <span>Projects</span>
+										</a>
+										<a href="#" class="list-group-item-custom list-group-item-action bg-light" fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="start center">
+											<mat-icon class="md-18">error_outline</mat-icon> <span>Problems</span>
+										</a>
+										<a [routerLink]="['/profile']" (click)="closeMainMenu($event)"  class="list-group-item-custom list-group-item-action bg-light" fxLayoutGap="10px" fxLayout="row" fxLayoutAlign="start center">
+											<mat-icon class="md-18">face</mat-icon> <span>Profile</span>
+										</a>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="menu-button text-white" fxLayout="row" fxLayoutAlign="center center">
+									<button mat-icon-button (click)="openMainMenu()"> <mat-icon class="md-36" >arrow_right</mat-icon> </button>
+								</div>
+								

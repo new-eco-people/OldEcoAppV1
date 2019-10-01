@@ -1,0 +1,11 @@
+
+<div class="row container" >
+  <div class="col col-12 py-4" *ngIf="(loadingProblems | async)">
+    <div>
+        <mat-spinner class="mx-auto"></mat-spinner>
+    </div>
+  </div>
+  <div class="col col-12 col-md-12 col-lg-6" *ngFor="let item of problems">
+    <app-public-problem-card [problem]="item"></app-public-problem-card>
+  </div>
+</div>

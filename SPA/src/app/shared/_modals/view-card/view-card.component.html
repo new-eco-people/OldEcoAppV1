@@ -1,0 +1,40 @@
+
+
+
+
+  <mat-dialog-content style="max-height: 100% !important">
+
+    <button mat-fab class="close-card bg-white text-danger" (click)="closeDialog()">
+      <mat-icon (click)="closeDialog()" >clear</mat-icon>
+  </button>
+
+    <div class="row">
+      <div class="col col-12 col-md-7 text-center" *ngIf="(data.problem._.photos.length > 0)">
+         <app-view-pictures [photos]="data.problem._.photos" ></app-view-pictures>
+      </div>
+
+      <div class="col col-12 col-md-5" [ngClass]="{'m-auto': !(data.problem._.photos.length > 0)}">
+       <article class="hentry post">
+           
+         <div class="detail-info">
+            <app-problem-heading-info [problem]="data.problem" ></app-problem-heading-info>
+      
+            <p>
+              {{data.problem._.description}}
+            </p>
+      
+      
+            <app-view-card-icons [problem]="data.problem"></app-view-card-icons>
+   
+            <app-comment-idea-chat-box [problem]="data.problem"></app-comment-idea-chat-box>
+         </div>
+
+         
+         
+       </article>
+      </div>
+    </div>
+
+
+  </mat-dialog-content>
+

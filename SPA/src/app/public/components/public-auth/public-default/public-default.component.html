@@ -1,0 +1,38 @@
+
+<div class="col col-12 text-center">
+  <h3 class="numbers-count">
+      <!-- {{ totalProblems }} <small class="lead">problems shared</small> -->
+      <ng2-odometer [number]="totalProblems"></ng2-odometer>
+  </h3>
+    <small class="lead border-bottom"> Problems shared</small>
+
+</div>
+<div class="row mt-3">
+
+  
+  <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
+  
+    <!-- Login-Registration Form  -->
+    <!-- <app-registration-login *ngIf="!(projectSlide | async)"></app-registration-login> -->
+    <!-- ... end Login-Registration Form  -->	
+    
+    <!-- Project Slide -->
+    <app-project-slide *ngIf="(projectSlide | async)"></app-project-slide>
+  
+  </div>
+
+  <div class="col col-lg-5 col-md-12 col-sm-12 col-12">
+    <div class="landing-content caption-text text-center text-dark">
+      <h1>Share</h1>
+      <h1>Vote</h1>
+      <p>and </p>
+      <h2 class="emph-word">Solve</h2>
+      <p>local and Global <strong>ECO</strong> problems</p>
+      <br>
+      <button (click)="openLetsDoIt()" class="btn btn-md c-white bg-primary" >Lets do it!!! <mat-icon class="md-18 text-white">pan_tool</mat-icon></button> <br>
+      <!-- <a [routerLink]="['/share-problems']" class="btn btn-md c-white bg-primary" >Share a problem</a> <br>
+      <a [routerLink]="['/problems']" class="btn btn-md c-white bg-success" >View problems</a> -->
+    </div>
+  </div>
+  
+</div>

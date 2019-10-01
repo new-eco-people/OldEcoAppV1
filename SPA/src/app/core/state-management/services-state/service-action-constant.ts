@@ -1,0 +1,24 @@
+
+export interface IServiceActionConstant {
+
+    // Auth Service
+    CONFIRM_EMAIL_LOADING: string;
+    CONFIRM_EMAIL_LOADING_FINISHED: string;
+
+    UPDATE_CHECKING_AVALIABILITY_LOADER: string;
+
+    // Problem Service
+    SET_SEARCH_FOR_PROBLEM_LOADER: string;
+}
+
+export const ServiceActionConstant: IServiceActionConstant = {
+
+    // Auth Service
+    CONFIRM_EMAIL_LOADING : 'CONFIRM_EMAIL_LOADING',
+    CONFIRM_EMAIL_LOADING_FINISHED: 'CONFIRM_EMAIL_LOADING_FINISHED',
+    UPDATE_CHECKING_AVALIABILITY_LOADER: 'UPDATE_CHECKING_AVALIABILITY_LOADER',
+
+    // Problem Service
+    SET_SEARCH_FOR_PROBLEM_LOADER: 'SET_SEARCH_FOR_PROBLEM_LOADER',
+};
+

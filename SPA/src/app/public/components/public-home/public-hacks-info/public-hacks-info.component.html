@@ -1,0 +1,192 @@
+<!-- Stunning header -->
+
+<div class="stunning-header bg-primary-eco">
+
+	<div class="header-spacer--standard"></div>
+
+	<div class="stunning-header-content">
+		<h1 class="stunning-header-title">E.C.O Hackathon A.P.I</h1>
+		<ul class="breadcrumbs">
+        <li class="breadcrumbs-item active">
+            <span>https://www.worldeco.uk/api/hacks/</span>
+          </li>
+		</ul>
+	</div>
+
+	<div class="content-bg-wrap"></div>
+</div>
+
+<div class="container mb-5">
+
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Get all Countries
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <div class="row">
+        <div class="col col-12">
+          <small><strong>URL:</strong> countries </small>
+        </div>
+        <div class="col col-12">
+          <small><strong>Method:</strong> get </small>
+        </div>
+
+        <div class="col col-12">
+          <small><strong>Return data:</strong> <pre>{{'[{ id: number, name: string },{...}]'}}</pre> 
+          </small>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Get all states of a country
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col col-12">
+          <small><strong>URL:</strong> states/{{ '{countryId}' }} </small>
+        </div>
+        <div class="col col-12">
+          <small><strong>Method:</strong> get </small>
+        </div>
+
+        <div class="col col-12">
+          <small><strong>Return data:</strong> <pre>{{'[{ id: number, name: string },{...}]'}}</pre> 
+          </small>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Get Problems
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col col-12">
+          <small><strong>URL:</strong> problems </small>
+        </div>
+        <div class="col col-12">
+          <small><strong>Method:</strong> get </small>
+        </div>
+        <div class="col col-12">
+          <small><strong>Query Paramters:</strong> 
+<pre>
+  <strong>countryId:</strong> I.D of the country
+  <strong>stateId:</strong> I.D of the state
+  <strong>eco:</strong> (e, c or o) i.e Environment, Community or Organization
+  <strong>ico:</strong> (i, c or o) i.e Individual, Community or Organization
+  <strong>ecoUn:</strong> See me if you really really want it :)
+  <strong>page:</strong> page number
+  <strong>pageSize:</strong> number of items to send back
+</pre>
+          </small>
+        </div>
+
+        <div class="col col-12">
+          <small><strong>Return data:</strong> 
+<pre>
+  {{'{ 
+    totalItems: number, 
+    items:[{problemId, ...}, {...}] 
+  }'}}
+</pre> 
+          </small>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Comments
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+  
+        <div class="row">
+          <div class="col col-12">
+            <small><strong>URL:</strong> comments </small>
+          </div>
+          <div class="col col-12">
+            <small><strong>Method:</strong> get </small>
+          </div>
+          <div class="col col-12">
+            <small><strong>Query Paramters:</strong> 
+  <pre>
+    <strong>problemId:</strong> I.D of the problem
+    <strong>page:</strong> page number
+    <strong>pageSize:</strong> number of items to send back
+  </pre>
+            </small>
+          </div>
+  
+          <div class="col col-12">
+            <small><strong>Return data:</strong> 
+  <pre>
+    {{'{ 
+      totalItems: number, 
+      items:[{comments}, {...}] 
+    }'}}
+  </pre> 
+            </small>
+          </div>
+        </div>
+  
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Ideas
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+    
+          <div class="row">
+            <div class="col col-12">
+              <small><strong>URL:</strong> ideas </small>
+            </div>
+            <div class="col col-12">
+              <small><strong>Method:</strong> get </small>
+            </div>
+            <div class="col col-12">
+              <small><strong>Query Paramters:</strong> 
+    <pre>
+      <strong>problemId:</strong> I.D of the problem
+      <strong>page:</strong> page number
+      <strong>pageSize:</strong> number of items to send back
+    </pre>
+              </small>
+            </div>
+    
+            <div class="col col-12">
+              <small><strong>Return data:</strong> 
+    <pre>
+      {{'{ 
+        totalItems: number, 
+        items:[{ideas}, {...}] 
+      }'}}
+    </pre> 
+              </small>
+            </div>
+          </div>
+    
+        </mat-expansion-panel>
+
+
+  </mat-accordion>
+
+
+
+</div>

@@ -1,0 +1,434 @@
+<div class="row">
+  <!-- <div class="ui-block"> -->
+    <!-- <div class="ui-block-title">
+      <h1 class="title">Share problems in your location</h1>
+    </div> -->
+    <!-- <div class="ui-block-content"> -->
+
+
+
+
+
+
+      <form #f="ngForm" (ngSubmit)="createProblem()" class="col col-12" enctype="multipart/form-data">
+
+
+        
+          <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[0]}">
+              <div class="ui-block-title">
+                  <h1 class="title">Location of the Problem</h1>
+              </div>
+              <div>
+  
+              <div class="col col-12 py-3 my-3">
+  
+                <mat-form-field>
+                  <mat-select 
+                    (selectionChange)="getState(ShareProblemFormData.data.countryId)"
+                    name="country"
+                    required
+                    [(ngModel)] = "ShareProblemFormData.data.countryId"
+                    #country = "ngModel"
+                    placeholder="Country of the problem">
+                      <mat-option value="" ></mat-option>
+                      <mat-option *ngFor="let country of ShareProblemFormData.countries" [value]="country.id">{{ country.name }}</mat-option>
+                    </mat-select>
+                    <mat-hint>
+                      Where is the problem located
+                      <mat-icon ><mat-spinner *ngIf="loadingCountry" [diameter]="15" ></mat-spinner></mat-icon>
+                    </mat-hint>
+                </mat-form-field>
+  
+              </div>
+
+              <div class="col col-12 py-3 my-3">
+  
+                  <mat-form-field>
+                    <mat-select 
+                      name="state"
+                      required
+                      [(ngModel)] = "ShareProblemFormData.data.stateId"
+                      placeholder="Region">
+                        <mat-option value="" ></mat-option>
+                        <mat-option *ngFor="let state of ShareProblemFormData.states" [value]="state.id">{{ state.name }}</mat-option>
+                      </mat-select>
+                      <mat-hint *ngIf="ShareProblemFormData.data.countryId">
+                        Region in Country
+                        <mat-icon ><mat-spinner *ngIf="loadingState" [diameter]="15" ></mat-spinner></mat-icon>
+                      </mat-hint>
+                  </mat-form-field>
+    
+                </div>
+  
+              
+              </div>
+            </div>
+
+
+            
+
+
+
+
+
+
+            <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[1]}">
+              <div class="ui-block-title">
+                  <h1 class="title">Type of ECO problem</h1>
+              </div>
+              <div class="ui-block-content">
+
+                <div class="col col-12 py-3 my-3">
+                  <mat-form-field>
+                    <mat-select
+                        required
+                        [(ngModel)] = "ShareProblemFormData.data.eco"
+                        #ecoData = "ngModel"
+                        (selectionChange)="ShareProblemFormData.setUnGoals()"
+                        name="eco" placeholder="This is an/a">
+                        <mat-option *ngFor="let item of ShareProblemFormData.eco" [value]="item.value" >{{item.name}}</mat-option>
+                    </mat-select>
+                    <mat-hint>Type of problem</mat-hint>
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+
+            <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[2]}">
+              <div class="ui-block-title">
+                  <h1 class="title">UN goals for {{ShareProblemFormData.ecoUnDisplay?.name}} problems </h1>
+              </div>
+              <div class="ui-block-content">
+
+                <div class="col col-12 py-3 my-3">
+
+                  <mat-form-field>
+                    <mat-select 
+                      placeholder="UN goals"
+                      required
+                      [(ngModel)] = "ShareProblemFormData.data.ecoUn" 
+                      name="ecoUn">
+                        <mat-option value="" ></mat-option>
+                        <mat-option *ngFor="let item of ShareProblemFormData.ecoUnDisplay?.unGoals" [value]="item" >{{item}}</mat-option>
+                    </mat-select>
+                    <mat-hint>UN goals related to the {{ShareProblemFormData.ecoUnDisplay?.name}}</mat-hint>
+                  </mat-form-field>
+    
+    
+                  <mat-form-field>
+                    <input 
+                      [(ngModel)]="ShareProblemFormData.data.ecoUnOther" 
+                      name="ecoUnOther" 
+                      matInput 
+                      placeholder="If type of UN goal is not listed, type yours" maxlength="50">
+                  </mat-form-field>
+                  
+                </div>
+
+              </div>
+            </div>
+
+
+
+
+            <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[3]}">
+              <div class="ui-block-title">
+                  <h1 class="title">Who suffers from such problems</h1>
+              </div>
+              <div class="ui-block-content">
+  
+
+                <div class="col col-12 py-3 my-3">
+
+
+                  <mat-form-field>
+                    <mat-select 
+                      [(ngModel)] = "ShareProblemFormData.data.ico"
+                      name="ico" 
+                      placeholder="This problem affects...">
+                      <mat-option *ngFor="let item of ShareProblemFormData.icos" [value]="item.value" >{{item.name}}</mat-option>
+                    </mat-select>
+                    <mat-hint>Who suffers from the problem listed</mat-hint>
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <input 
+                      name="icoOther" 
+                      matInput 
+                      [(ngModel)]="ShareProblemFormData.data.icoOther"
+                      placeholder="Other" 
+                      maxlength="50">
+                    <mat-hint>Add more description</mat-hint>
+                  </mat-form-field>
+              
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[4]}">
+              <div class="ui-block-title">
+                  <h1 class="title">Description of the Problem</h1>
+              </div>
+              <div class="ui-block-content">
+
+                <div class="col col-12 py-3 my-3">
+
+
+                  <mat-form-field>
+                    <textarea 
+                      name="description" 
+                      [(ngModel)] = "ShareProblemFormData.data.description" 
+                      required
+                      matInput 
+                      #desc = "ngModel"
+                      placeholder="Description of the problem" 
+                      maxlength="1000" 
+                      cols="4"
+                      > </textarea>
+                      <mat-hint> {{ desc.value?.length }}/1000 </mat-hint>
+                  </mat-form-field>
+                    
+                </div>
+
+              </div>
+            </div>
+
+
+
+            <!-- [ngClass]="{'d-none': !formSurvey[5]}" -->
+            <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[5]}">
+              <div class="ui-block-title">
+                  <h1 class="title">Upload Pictures <small class="lead">{{ ShareProblemFormData.data.images?.length }}/5</small></h1>
+              </div>
+
+                <ngx-img (onSelect)="ShareProblemFormData.storeTempFile($event)" #ngxImg [config]="imageData.options"></ngx-img>
+                <button 
+                  type="button" 
+                  [disabled]="(!ShareProblemFormData.file || ShareProblemFormData.data.images?.length >= 6)" 
+                  class="my-2 full-width btn btn-md c-white btn-primary" 
+                  (click)="ShareProblemFormData.addImage(); ngxImg.reset()">
+                    Add Photo
+                  </button>
+
+                <div class="row">
+                  <div class="thumb-div" *ngFor="let item of ShareProblemFormData.data.images; index as i">
+                    <mat-icon class="text-danger delete-img" (click)="ShareProblemFormData.removeImage(i)">delete_forever</mat-icon>
+                    <img [src]="item" class="img-thumbnail" (click)="ShareProblemFormData.showImage(i)">
+                  </div>
+                </div>
+          
+            </div>
+
+            <!-- [ngClass]="{'d-none': !formSurvey[6]}" -->
+            <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[6]}">
+              <div class="ui-block-title">
+                  <h1 class="title">Personal Detail</h1>
+              </div>
+              <div class="ui-block-content">
+                <h6 class="lead">You can add your details to link this problem and relavant project urls to it <strong>(optional)</strong></h6>
+
+                <div class="row py-3 my-3">
+
+                  <div class="col col-12 col-sm-6 col-md-6 col-lg-4">
+                    <mat-form-field>
+                      <input
+                        name="firstName"
+                        pattern='^[a-zA-Z0-9-_]+$'
+                        matInput 
+                        [(ngModel)]="ShareProblemFormData.data.firstName"
+                        #firstName = "ngModel"
+                        placeholder="First Name" 
+                        maxlength="50">
+                    </mat-form-field>
+                  </div>
+
+                    <div class="col col-12 col-sm-6 col-md-6 col-lg-4">
+                      <mat-form-field>
+                        <input
+                          [(ngModel)]="ShareProblemFormData.data.lastName"
+                          pattern='^[a-zA-Z0-9-_]+$'
+                          matInput 
+                          name="lastName"
+                          #last_Name = "ngModel"
+                          placeholder="Last Name" 
+                          maxlength="50">
+                        <!-- <mat-hint>If not one of the ICO, kindly let us know</mat-hint> -->
+                      </mat-form-field>
+                    </div>
+
+                  <div class="col col-12 col-sm-12 col-md-12 col-lg-4">
+                    <mat-form-field>
+                      <input
+                        [(ngModel)]="ShareProblemFormData.data.email"
+                        email
+                        matInput 
+                        name="userEmail"
+                        #userEmail = "ngModel"
+                        placeholder="Email Address" 
+                        maxlength="50">
+                      <!-- <mat-hint>If not one of the ICO, kindly let us know</mat-hint> -->
+                    </mat-form-field>
+                  </div>
+
+                  
+                  <!-- ------------------------------------------- Check boxes ------------------------------------------- -->
+                  <div class="mt-2" 
+                  [ngClass]="{'d-none': 
+                  !(
+                    userEmail.value && userEmail.valid && 
+                    firstName.value && firstName.valid &&
+                    last_Name.value && last_Name.valid
+                  )}"
+                  >
+
+                    <div class="col col-12">
+                        <mat-checkbox
+                        name="rememberMe"
+                        [(ngModel)]="ShareProblemFormData.data.rememberMe">
+                          <small>
+                            Remember Me
+                          </small>
+                        </mat-checkbox>
+                        <mat-icon 
+                          matTooltip="This email will be used for other likes. You can clear this from the menu bar"
+                          class="md-18" 
+                          >help
+                        </mat-icon>
+                    </div>
+            
+                    <div class="col col-12">
+                        <mat-checkbox
+                        name="addProblemToUser"
+                        [(ngModel)]="ShareProblemFormData.data.addProblemToUser">
+                          <small>
+                            Link this problem to my email
+                          </small>
+                        </mat-checkbox>
+    
+                        <mat-icon 
+                        matTooltip="All your problems will be avaliable on your account when eco is launched"
+                        aria-label="Button that displays a tooltip when focused or hovered over"
+                        class="md-18" 
+                        >help</mat-icon>
+                    </div>
+
+                    <div class="col col-12">
+                        <mat-checkbox
+                        name="addProjectToProblem"
+                        [(ngModel)]="ShareProblemFormData.data.addProjectToProblem"
+                        #addProjectToProblem = "ngModel"
+                        >
+                          <small>
+                            Add a project link
+                          </small>
+                        </mat-checkbox>
+    
+                        <mat-icon 
+                        matTooltip="If you have already started a project on this problem, you can share the link"
+                        aria-label="Button that displays a tooltip when focused or hovered over"
+                        class="md-18" 
+                        >help</mat-icon>
+                    </div>
+
+                  </div>
+                  <!-- ------------------------------------------- End of checks ------------------------------------------- -->
+
+
+                  <!-- ------------------------------------------- Project link ------------------------------------------- -->
+                  <div class="mt-2 col c0l-12"
+                  [ngClass]="{'d-none': (addProjectToProblem.value !== true)}"
+                  >
+                    <div class="col col-12">
+                      <mat-form-field>
+                        <input
+                          name="projectLink"
+                          url
+                          matInput
+                          [(ngModel)]="ShareProblemFormData.data.projectLink"
+                          #lastName = "ngModel"
+                          value="null"
+                          placeholder="Url Link to the project" 
+                          maxlength="200">
+                        <mat-hint>http://www.example.com</mat-hint>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <!-- ------------------------------------------- End of Project link ------------------------------------------- -->
+
+                </div>
+              </div>
+              
+            
+              <div class="text-center">
+                <mat-checkbox
+                  name="agree"
+                  [(ngModel)]="ShareProblemFormData.data.agree"
+                  #agree = "ngModel"
+                  >
+                    <small (click)="displayTerms()" style="cursor: pointer; color: blue; text-decoration: underline">
+                      I agree to Eco Terms and conditions
+                    </small>
+                  </mat-checkbox>
+              </div>
+
+              <!-- [disabled]="(f.invalid || uploadingProblem)" || !ShareProblemFormData.data.agree -->
+            <div class="col col-12 text-center pb-3">
+              <button 
+                class="btn btn-md btn-primary" 
+                type="submit"
+                [disabled]="(f.invalid || uploadingProblem || !ShareProblemFormData.data.agree)"
+              >
+              Share Problem
+              <mat-icon *ngIf="uploadingProblem"><mat-spinner class="color" [diameter]="30" ></mat-spinner></mat-icon>
+            </button>
+            </div>
+
+          </div>
+
+          
+          <!-- [disabled]="(f.invalid || uploadingProblem)" -->
+        
+
+
+
+
+          <div class="border-top container-fluid bg-white py-4 text-center">
+          
+            <button
+              (click)="goBack()"
+              mat-raised-button color="primary" 
+              class="text-white float-left" 
+              [disabled]="formSurvey[0]" 
+              type="button">
+              <mat-icon class="md-48">keyboard_arrow_left</mat-icon></button> 
+
+                <span class="lead">{{ this.position+1 }} of 7</span>  
+
+            <button 
+              (click)="goNext()"
+              [disabled]="formSurvey[this.formSurvey.length-1]"
+              mat-raised-button color="primary" 
+              class="text-white float-right" 
+              type="button">
+              <mat-icon class="md-48">keyboard_arrow_right</mat-icon></button>
+
+					</div>
+        
+      </form>
+
+
+
+
+
+
+<!-- 
+    </div>
+  </div> -->
+</div>

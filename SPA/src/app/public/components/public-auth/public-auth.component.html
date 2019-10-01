@@ -1,0 +1,51 @@
+
+
+<div class="landing-page">
+
+<div class="particles">
+		<particles [style]="myStyle" [width]="width" [height]="height" [params]="myParams"></particles>
+</div>
+
+<div class="header--standard header--standard-landing">
+	<div class="container">
+		<div class="header--standard-wrap pt-2 pb-2">
+
+			<a [routerLink]="['/']"  class="logo">
+				<div class="img-wrap">
+					<img src="/assets/img/ecoworld.png" class="eco-logo">
+				</div>
+				<div class="title-block">
+					<!-- <div class="sub-title">A Digitalized Economy</div> -->
+				</div>
+			</a>
+
+			<div style="position: absolute; right: 1px;">
+				<button mat-button [matMenuTriggerFor]="menu">
+					<svg class="olymp-menu-icon" style="fill:fff; background-color: #fff"><use xlink:href="/assets/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
+				</button>
+				<mat-menu #menu="matMenu">
+					<button mat-menu-item  [routerLink]="['']" routerLinkActive="router-link-active"  >Home</button>
+					<button mat-menu-item  [routerLink]="['/about']" routerLinkActive="router-link-active">About ECO</button>
+					<button mat-menu-item  [routerLink]="['/problems']" routerLinkActive="router-link-active">Share your problem</button>
+					<button mat-menu-item  [routerLink]="['/share-problems']" routerLinkActive="router-link-active">View Problems</button>
+				</mat-menu>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<!-- ... end Header Standard Landing  -->
+<div class="header-spacer--standard"></div>
+
+<div class="container">
+	<app-public-default *ngIf="(page | async) === 'default'" ></app-public-default>
+	<app-reset-password *ngIf="(page | async)=== 'password'" ></app-reset-password>
+	<app-verify-email *ngIf="(page | async) === 'email'" ></app-verify-email>
+</div>
+
+<!-- ... end Window-popup Restore Password -->
+
+
+
+</div>
