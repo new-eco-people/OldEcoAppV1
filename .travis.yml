@@ -1,0 +1,39 @@
+sudo: required
+language: generic
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: deploy-staging
+      if: branch = develop
+      before_install:
+        - travis_wait 30
+        - docker build -t newecopeoplev1/old_frontend_dev ./SPA
+        - docker build -t newecopeoplev1/old_backend_dev -f ./API/Dockerfile.staging ./backend
+        - docker build -t newecopeoplev1/old_nginx_dev ./nginx
+      install:
+        # login to docker hub
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+        # push to docker hub
+        - docker push newecopeoplev1/old_frontend_dev
+        - docker push newecopeoplev1/old_backend_dev
+        - docker push newecopeoplev1/old_nginx_dev
+        - docker push newecopeoplev1/old_nginx_template_dev
+      
+    - stage: deploy-production
+      if: branch = master
+      before_install:
+        - travis_wait 30
+        - docker build -t newecopeoplev1/frontend ./frontend
+        - docker build -t newecopeoplev1/backend ./backend
+        - docker build -t newecopeoplev1/nginx ./nginx
+      install:
+        # login to docker hub
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+        # push to docker hub uisng login_page
+        - docker push newecopeoplev1/frontend
+        - docker push newecopeoplev1/backend
+        - docker push newecopeoplev1/nginx

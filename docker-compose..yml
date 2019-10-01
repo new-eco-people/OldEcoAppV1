@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+
+  nginx:
+    restart: always
+    image: newecopeoplev1/old_nginx_dev
+    ports:
+      - "80:80"
+
+  backend:
+    image: newecopeoplev1/old_backend_dev
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DefaultConnection=${POSTGRESS_CONNECTION_STRING}
+    ports:
+      - "5000"
+  
+  frontend:
+    image: newecopeoplev1/old_frontend_dev
+    ports:
+      - "4200"
+  
