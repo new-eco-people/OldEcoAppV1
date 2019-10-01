@@ -29,7 +29,7 @@ COPY --from=build-env /app/out .
 
 # Copy botdetect.xml for botdetect captcha
 # RUN mkdir Api
-COPY --from=build-env /app/botdetect.xml ./
+# COPY --from=build-env /app/botdetect.xml ./
 
 # Copy countries and states json files, locations
 RUN mkdir Helper/SeedDaata
