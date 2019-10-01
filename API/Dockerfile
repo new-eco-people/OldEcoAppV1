@@ -32,7 +32,7 @@ COPY --from=build-env /app/out .
 # COPY --from=build-env /app/botdetect.xml ./
 
 # Copy countries and states json files, locations
-RUN mkdir Helper/SeedData
+# RUN mkdir Helper/SeedData
 COPY --from=build-env /app/Helper/SeedData ./Helper/SeedData
 
 # Create the command to start everything
