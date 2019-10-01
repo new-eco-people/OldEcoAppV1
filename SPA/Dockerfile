@@ -27,4 +27,4 @@ EXPOSE 4200
 COPY ./default.conf /etc/nginx/conf.d/default.conf
 
 # Copy ready prod file
-COPY --from=builder ./app/dist /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
