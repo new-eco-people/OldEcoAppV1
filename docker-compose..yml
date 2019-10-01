@@ -12,7 +12,7 @@ services:
     image: newecopeoplev1/old_backend_dev
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - DefaultConnection=${POSTGRESS_CONNECTION_STRING}
+      - DefaultConnection=${POSTGRES_CONNECTION_STRING}
     ports:
       - "5000"
   
