@@ -35,4 +35,4 @@ COPY --from=build-env /app/botdetect.xml ./
 RUN mkdir Helper/SeedDaata
 COPY --from=build-env /app/Helper/SeedDaata ./Helper/SeedDaata
 
-ENTRYPOINT [ "dotnet","run"  ]
+ENTRYPOINT [ "dotnet","Code.dll"  ]
