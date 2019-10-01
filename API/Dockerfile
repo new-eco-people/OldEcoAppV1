@@ -32,8 +32,8 @@ COPY --from=build-env /app/out .
 # COPY --from=build-env /app/botdetect.xml ./
 
 # Copy countries and states json files, locations
-RUN mkdir Helper/SeedDaata
-COPY --from=build-env /app/Helper/SeedDaata ./Helper/SeedDaata
+RUN mkdir Helper/SeedData
+COPY --from=build-env /app/Helper/SeedData ./Helper/SeedData
 
 # Create the command to start everything
 ENTRYPOINT [ "dotnet","Code.dll"  ]
