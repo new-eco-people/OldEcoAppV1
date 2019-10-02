@@ -31,6 +31,7 @@ using API.Core.Interfaces.IServices;
 using API.Helper.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using API.Helper.Functions;
 
 namespace API
 {
@@ -46,9 +47,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var prod = Environment.GetEnvironmentVariable("DefaultConnection");
-            var dev = Configuration.GetSection("ConnectionStrings:DefaultConnection").Value;
-            var connectionString = prod;
+            var connectionString = Environment.GetEnvironmentVariable(AppEnvironmentVariables.ConnectionString);
 
             services.AddDbContext<DataContext>(x => x.UseNpgsql(connectionString));
 // 
@@ -114,8 +113,7 @@ namespace API
 
             services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
 
-            // Add Cloudinary
-            services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+            AppEnvironmentVariables.ConfigureCloundiary();
             
         }
 

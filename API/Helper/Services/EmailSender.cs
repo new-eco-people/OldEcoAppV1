@@ -23,6 +23,7 @@ namespace API.Helper.Services
         public EmailSender(IConfiguration config)
         {
             SendGridApiKey = Environment.GetEnvironmentVariable("SendGridApiKey");
+
         }
 
         public Task OnUserRegistration(object source, EmailArgs emailArgs)

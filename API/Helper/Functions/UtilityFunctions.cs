@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using API.Helper.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace API.Helper.Functions
@@ -54,6 +55,34 @@ namespace API.Helper.Functions
             }
         
             return new string(chars.ToArray());
+        }
+    }
+
+    public class AppEnvironmentVariables {
+        public static string SendGrid = "SENDGRID_APIKEY";
+        public static string Cloundinary = "CLOUDINARY_DETAILS";
+        public static CloudinarySettings CloudinaryDetails = new CloudinarySettings();
+        private static readonly string delimeter = "@";
+
+        public static string ConnectionString = "DefaultConnection";
+
+        public static void ConfigureCloundiary() {
+            var cloudinary = Environment.GetEnvironmentVariable(AppEnvironmentVariables.Cloundinary);
+
+            // [0] = name, [1] = Key, [2] = Secret
+            var array = new string[3];
+
+            if (!string.IsNullOrEmpty(cloudinary)){
+                array = cloudinary.Split(delimeter);
+                AppEnvironmentVariables.CloudinaryDetails.Name = array[0];
+                AppEnvironmentVariables.CloudinaryDetails.Key = array[1];
+                AppEnvironmentVariables.CloudinaryDetails.Secret = array[2];
+            } else {
+                AppEnvironmentVariables.CloudinaryDetails.Name = " ";
+                AppEnvironmentVariables.CloudinaryDetails.Key = " ";
+                AppEnvironmentVariables.CloudinaryDetails.Secret = " ";
+            }
+
         }
     }
 }

@@ -24,12 +24,12 @@ namespace API.Persistence.Repository
 
         public ILocationRepository Location { get; set; }
 
-        public UnitOfWork(DataContext context, UserManager<User> userManager, IOptions<CloudinarySettings> cloudinaryConfig, IHostingEnvironment env)
+        public UnitOfWork(DataContext context, UserManager<User> userManager, IHostingEnvironment env)
         {
             _context = context;
             Projects = new ProjectRepository(_context);
             Users = new UserRepository(_context, userManager);
-            ProbBeta = new ProblemBetaRepository(_context, userManager, cloudinaryConfig, env, Users);
+            ProbBeta = new ProblemBetaRepository(_context, userManager, env, Users);
             Auth = new AuthRepository(userManager);
             Likes = new LikeRepository(_context);
             Comments = new CommentRepository(_context);

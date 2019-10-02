@@ -32,7 +32,6 @@ namespace API.Persistence.Repository
     public class ProblemBetaRepository : Repository<ProblemBeta>, IProblemBetaRepository
     {
         UserManager<User> _userManager;
-        private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private readonly IHostingEnvironment _env;
         private readonly IUserRepository _user;
         private readonly Cloudinary _cloudinary;
@@ -41,21 +40,19 @@ namespace API.Persistence.Repository
 
         public ProblemBetaRepository(
             DataContext context,  
-            UserManager<User> userManager, 
-            IOptions<CloudinarySettings> cloudinaryConfig,
+            UserManager<User> userManager,
             IHostingEnvironment env,
             IUserRepository User
             )
             : base(context)
         {
             _userManager = userManager;
-            _cloudinaryConfig = cloudinaryConfig;
             _env = env;
             _user = User;
             var Account = new Account(
-                _cloudinaryConfig.Value.Name,
-                _cloudinaryConfig.Value.Key,
-                _cloudinaryConfig.Value.Secret
+                AppEnvironmentVariables.CloudinaryDetails.Name,
+                AppEnvironmentVariables.CloudinaryDetails.Key,
+                AppEnvironmentVariables.CloudinaryDetails.Secret
             );
 
             _cloudinary = new Cloudinary(Account);
