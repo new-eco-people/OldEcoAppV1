@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:aspnetcore-runtime AS build-env
+FROM microsoft/dotnet AS build-env
 WORKDIR /app
 
 # Copy everything .dockerignore ignores the rest of the files
