@@ -1,6 +1,6 @@
 image: docker:latest
 services:
-  - docker: testing
+  - docker:testing
 
 stages:
   - test
