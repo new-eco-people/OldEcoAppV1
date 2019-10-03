@@ -45,6 +45,4 @@ services:
       - /app/node_modules
     ports:
       - "4200:4200"
-
-    # host={};port={};database={};username={};password={};SSL Mode=Require;Trust Server Certificate=true
   
