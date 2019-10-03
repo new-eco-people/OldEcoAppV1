@@ -8,16 +8,16 @@ finally run service ssh restart
 
 1. 
 
-sudo mkdir -p /docker/letsencrypt-docker-nginx/src/letsencrypt/letsencrypt-site
+sudo mkdir -p /docker/letsencrypt-docker-nginx/src/letsencrypt
 
-copy docker-compose.yml from letsencrypt folder to 
-/docker/letsencrypt-docker-nginx/src/letsencrypt
+cd /docker/letsencrypt-docker-nginx/src/letsencrypt
 
-copy nginx.conf to
-/docker/letsencrypt-docker-nginx/src/letsencrypt/
+cp docker-compose.yml /docker/letsencrypt-docker-nginx/src/letsencrypt
+
+cp nginx.conf /docker/letsencrypt-docker-nginx/src/letsencrypt/
 
 
-2. sudo into /docker/letsencrypt-docker-nginx/src/letsencrypt
+2. cd /docker/letsencrypt-docker-nginx/src/letsencrypt
 3. type sudo docker-compose up -d to test the app is working
 
 4. to test if everything goes well without risk run this 
@@ -54,7 +54,7 @@ sudo docker run -it --rm \
 -v "/docker-volumes/var/log/letsencrypt:/var/log/letsencrypt" \
 certbot/certbot \
 certonly --webroot \
---email youremail@domain.com --agree-tos --no-eff-email \
+--email newecopeople@outlook.com --agree-tos --no-eff-email \
 --webroot-path=/data/letsencrypt \
 -d newecopeople.com -d www.newecopeople.com
 
