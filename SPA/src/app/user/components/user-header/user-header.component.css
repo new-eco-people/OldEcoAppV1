@@ -1,0 +1,30 @@
+
+.text-white > span  {
+    margin: 0 20px;
+}
+
+.message-button {
+    position: fixed;
+    top: calc(50% - 25px);
+    right: -6px;
+    width: 60px;
+    height: 60px;
+    background-color: #7c5ac2;
+    padding-top: 7px;
+    z-index: 999;
+    border-radius: 100px 0 0 100px;
+    -webkit-box-shadow: -5px 0px 7px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: -5px 0px 7px -3px rgba(0,0,0,0.75);
+    box-shadow: -5px 0px 7px -3px rgba(0,0,0,0.75);
+}
+
+.caret-status {
+    position: absolute;
+    bottom: -18px;
+    right: -17px;
+}
+
+author-thumb > a {
+    text-decoration: none;
+}
+

@@ -1,0 +1,152 @@
+
+
+<div class="landing-page" [ngClass]="{'toggled': (mainMenu | async)}" id="wrapper">
+
+
+
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Filter By</div>
+            <div class="list-group list-group-flush">
+                <form class="search-filter">
+                    <span href="#" class="list-group-item list-group-item-action bg-light">
+                        <mat-form-field>
+                            <mat-select (selectionChange)="getState(searchFilter.countryId)" name="countryId" [(ngModel)]="searchFilter.countryId" placeholder="Country">
+                                <mat-option  value="" ></mat-option>    
+                                <mat-option *ngFor="let country of countries" [value]="country.id" >{{ country.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+                    <span href="#" class="list-group-item list-group-item-action bg-light" [ngClass]="{'d-none': !searchFilter.countryId}">
+                        <mat-form-field>
+                            <mat-select name="stateId" [(ngModel)]="searchFilter.stateId" placeholder="State">
+                                    <mat-option *ngFor="let state of states" [value]="state.id" >{{ state.name }}</mat-option>
+                            </mat-select>
+                            <mat-hint>
+                                <mat-icon ><mat-spinner *ngIf="loadingStates" [diameter]="15" ></mat-spinner></mat-icon>
+                            </mat-hint>
+                        </mat-form-field>
+                    </span>
+                    <span href="#" class="list-group-item list-group-item-action bg-light">
+                        <mat-form-field>
+                            <mat-select name="eco" [(ngModel)]="searchFilter.eco" placeholder="Problem Type">
+                                    <mat-option select  value="e" >Environment</mat-option> 
+                                    <mat-option  value="c" >Community</mat-option> 
+                                    <mat-option  value="o" >Organization</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+                    <span href="#" class="list-group-item list-group-item-action bg-light">
+                        <mat-form-field>
+                            <mat-select name="ico" [(ngModel)]="searchFilter.ico" placeholder="People Type">
+                                    <mat-option select  value="i" >Individual</mat-option> 
+                                    <mat-option  value="c" >Community</mat-option> 
+                                    <mat-option  value="o" >Organization</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+
+                    <span href="#" class="list-group-item list-group-item-action bg-light">
+                        <mat-form-field>
+                            <mat-select name="ico" [(ngModel)]="searchFilter.ecoUn" placeholder="UN Goals">
+                                <mat-option>-- None --</mat-option>
+                                <mat-optgroup *ngFor="let group of ShareProblemFormData.eco" [label]="group.name" [disabled]="false">
+                                    <ng-container *ngFor="let eco of ShareProblemFormData.ecoUn">
+                                        <mat-option *ngFor="let value of eco.unGoals" [value]="value">
+                                            {{value}}
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-optgroup>
+                            </mat-select>
+                        </mat-form-field>
+                    </span>
+
+                    <span href="#" class="list-group-item list-group-item-action bg-light">
+                        <button (click)="makeSearch()"  class="btn full-width btn-primary">Search</button>
+                    </span>
+                </form>
+            </div>
+
+            <button mat-fab class="bg-primary inner-menu text-white" (click)="toggleMainMenu()">
+                <mat-icon>clear</mat-icon>
+            </button>
+
+        </div>
+
+
+        <div class="particles">
+            <particles [style]="myStyle" [width]="width" [height]="height" [params]="myParams"></particles>
+        </div>
+        
+        <div class="px-3">
+            <div class="header-custom">
+                <div class="header--standard-wrap pt-2 pb-2">
+        
+                    <a [routerLink]="['/']"  class="logo" >
+                        <div class="img-wrap">
+                            <img src="/assets/img/logo/ecoworld.png" class="eco-logo">
+                        </div>
+                        <div class="title-block">
+                            <!-- <div class="sub-title">A Digitalized Economy</div> -->
+                        </div>
+                    </a>
+                    
+                    <div style="width: 88%" *ngIf="displaySearch">
+                        <form (ngSubmit)="makeSearch()">
+                            <mat-form-field class="text-dark bg-white">
+                                <input matInput name="name" [(ngModel)]="searchFilter.name" 
+                                placeholder="Search by first name or last name">
+                                
+                                <mat-hint>
+                                         {{ getSearchCountry(previousFilter?.countryId) }} 
+                                         {{ getSearchState(previousFilter?.stateId) }} 
+                                         {{ getSearchedEco(previousFilter?.eco) }} 
+                                         {{ getSearchedIco(previousFilter?.ico) }} 
+                                         {{ getUnGoals(previousFilter?.ecoUn) }} 
+                                         {{ previousFilter?.name }}
+                                 </mat-hint>
+                            </mat-form-field>
+                        </form>
+
+                    </div>
+
+                    <div style="position: absolute; right: 1px;">
+                        <button mat-button [matMenuTriggerFor]="menu" class="bg-primary text-white">
+                            <svg class="olymp-menu-icon mr-2" style="fill:#fff;"><use xlink:href="/assets/svg-icons/sprites/icons.svg#olymp-menu-icon"></use></svg>
+                            Menu
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item  [routerLink]="['']" routerLinkActive="router-link-active"  >Home</button>
+                            <button mat-menu-item  [routerLink]="['/about']" routerLinkActive="router-link-active">About ECO</button>
+                            <button mat-menu-item  [routerLink]="['/share-problems']" routerLinkActive="router-link-active">Share ECO problem</button>
+                            <button mat-menu-item  [routerLink]="['/problems']" routerLinkActive="router-link-active">View Problems</button>
+                            <!-- <button mat-menu-item  [routerLink]="['/hacks']" routerLinkActive="router-link-active">Hack Api</button> -->
+                            <button mat-menu-item  *ngIf="(user | async)" (click)="forgetMe()">Forget me</button>
+                        </mat-menu>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+<!-- 
+        <span class="h2 bg-white px-2 text-dark ">
+            <mat-icon></mat-icon> 
+        </span> -->
+        <button mat-fab class="filter-menu bg-primary text-white" *ngIf="displaySearch" (click)="toggleMainMenu()">
+            <mat-icon>filter_list</mat-icon>
+        </button>
+        
+    
+    <!-- ... end Header Standard Landing  -->
+    <div class="header-spacer--standard"></div>
+    
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+    
+    <!-- ... end Window-popup Restore Password -->
+    
+    
+    
+    </div>
+
+    

@@ -1,0 +1,88 @@
+<div class="message-container border border-primary">
+
+<!-- Message header -->
+<!-- <p class="bg-primary text-white sticky-top" *ngIf="(isComment | async)">Comments</p>
+<p class="bg-success text-white sticky-top" *ngIf="!(isComment | async)">Ideas</p> -->
+<p class="bg-success text-white sticky-top">Ideas</p>
+
+
+ <!-- <div *ngIf="(isComment | async)">
+     <div class="mb-3 mx-1 mt-1" *ngFor="let comment of comments">
+       <div >
+          <small><strong class="mr-2">{{ comment.fullName() }}</strong></small>
+       </div>
+       <div class="bg-chatbox px-2 py-1">
+         <small>{{ comment.message }}</small>
+       </div>
+       <div class="smaller">
+        <small>{{ comment.humanTime() }}</small>
+       </div>
+     </div>
+     <div *ngIf="!noComments()" (click)="getComments()" class="text-primary pl-1"><small style="cursor: pointer">view more</small></div>
+ </div> -->
+
+ <div class="chat-box">
+  <div class="mb-3 mx-1 mt-1" *ngFor="let idea of ideas">
+    <div >
+       <small><strong class="mr-2">{{ idea.fullName() }}</strong></small>
+    </div>
+    <div class="bg-chatbox px-2 py-1">
+      <small>{{ idea.message }}</small>
+    </div>
+    <div class="smaller">
+     <small>{{ idea.humanTime() }}</small>
+    </div>
+  </div>
+  <div *ngIf="!noIdeas()" (click)="getIdeas()" class="text-primary pl-1"><small style="cursor: pointer">view more</small></div>
+</div>
+
+
+
+
+<form #fidea="ngForm" (keydown.enter)="sendMessage(fidea, false)">
+  <div class="form-group comment-input bg-success" >
+    <textarea 
+      matInput
+      [disabled]="inputField"
+      placeholder="Type your idea"
+      ngModel
+      #ideaMessage
+      name="message"
+      (keydown)="autoResizeIdea()"
+      rows="1" 
+      maxlength="1000"
+      class="form-control bg-white">
+    </textarea>
+    <div class="smaller text-white">
+      <small>{{ ideaMessage.value?.length }}/1000  </small>
+     </div>
+  </div>
+  </form>
+
+</div>
+
+
+
+ 
+
+<!-- Comment form -->
+<!-- <form #fcomment="ngForm" *ngIf="(isComment | async)" (keydown.enter)="sendMessage(fcomment)">
+  <div class="form-group comment-input bg-primary">
+  <textarea 
+    [disabled]="inputField"
+    placeholder="Type your comment" 
+    name="message"
+    ngModel
+    #commentMessage
+    maxlength="1000"
+    rows="1" 
+    (keydown)="autoResizeComment()"
+    class="form-control bg-white"></textarea>
+    <div class="smaller text-white">
+      <small>{{ commentMessage.value?.length }}/1000  </small>
+    </div>
+  </div>
+</form> -->
+
+<!-- Idea form -->
+<!-- <mat-icon class="pt-1 pl-1"><mat-spinner [diameter]="15" ></mat-spinner></mat-icon> -->

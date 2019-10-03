@@ -1,0 +1,14 @@
+
+
+/* side bar to move */
+
+.fixed-sidebar-left {
+    top: 60px;
+    position: fixed;
+    left: 300px;
+    z-index: 30;
+}
+
+.page {
+    margin: auto;
+}

@@ -1,0 +1,45 @@
+.text-box {
+    height: 38vh;
+    overflow-y: scroll;
+}
+
+.modal {
+    overflow: scroll;
+}
+
+
+.close-card {
+    position: absolute;
+    top: 0px;
+    z-index: 9999;
+    right: 0px;
+}
+
+.post {
+    padding: 0px 10px;
+    height: 100%;
+    border-bottom: none;
+    position: relative;
+}
+
+.post p {
+    margin: 0;
+}
+
+.post-additional-info {
+    padding: 0px;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+
+.detail-info {
+    /* overflow-y: scroll;
+    overflow-x: hidden;
+    height: 500px; */
+    margin-bottom: 50px;
+}
+
+.row {
+    margin-left: -25px;
+    margin-right: -25px;
+}

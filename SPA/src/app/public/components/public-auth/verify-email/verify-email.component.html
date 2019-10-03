@@ -1,0 +1,79 @@
+
+
+<div class="middle-fit">
+  <div class="row">
+
+     <div class="col col-12">
+        <div class="ui-block">
+
+          
+            <div class="ui-block-title">
+              <h6 class="title">Email Verification</h6>
+            </div>
+  
+            <div class="ui-block-content">
+              <div class="col col-12" *ngIf="!(loading | async)">
+
+                <div class="col col-12" *ngIf="(confirmedEmail | async)" >
+
+                  <div class="col col-12 display-flex mb-3">
+                      <mat-icon class="material-icons md-48 text-success">check</mat-icon> <h5> Your email has been verified successfully</h5>
+                  </div>
+                  <div class="col-md-4">
+                      <button 
+                      color="warn"
+                      mat-raised-button
+                      (click)="backToLoginPage()" class="btn-purple full-width">Login</button>
+                    </div>
+                </div>
+
+                <div  *ngIf="!(confirmedEmail | async)" >
+
+                  <div class="col col-12 display-flex mb-3">
+                      <mat-icon class="material-icons md-48 text-danger">warning</mat-icon> <h5> Your email could not be verified</h5>
+                  </div>
+
+                    <div class="col col-12">
+                        <form>
+                            <!-- <mat-form-field class="col col-12 mb-2">
+                              <input matInput placeholder="Email address" >
+                              <mat-hint>Send another link to your email</mat-hint>
+                            </mat-form-field> -->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <button 
+                                    mat-raised-button 
+                                    color="primary"
+                                    type="button" (click)="resendConfirmation()" [disabled]="sending" class="btn-success full-width">Resend
+                                    <mat-icon *ngIf="sending"><mat-spinner [diameter]="20" ></mat-spinner></mat-icon>
+                                  </button>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <button 
+                                    color="warn"
+                                    mat-raised-button
+                                    type="button" (click)="backToLoginPage()" class="btn-purple full-width">Go Back</button>
+                                </div>
+                            </div>
+
+                          </form>
+                    </div>
+                </div>
+
+              </div>
+
+              <div class="col col-12" *ngIf="(loading | async)" >
+                <mat-spinner
+                  class="center-spinner"
+                  color="primary">
+                </mat-spinner>
+              </div>
+            </div>
+  
+        </div>
+     </div>
+
+  </div>
+</div>

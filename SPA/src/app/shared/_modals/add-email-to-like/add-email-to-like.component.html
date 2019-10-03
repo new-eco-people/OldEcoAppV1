@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>Vote Problem</h2>
+<mat-dialog-content class="mat-typography">
+ <div>
+   <form #f="ngForm" (ngSubmit)="sendLike(f)" >
+     <p>To keep track of your Votes, your email is required</p>
+     <div class="form-group">
+
+        <mat-form-field class="example-full-width">
+          <input name="emailAddress" [(ngModel)]="formData.emailAddress" #email="ngModel" matInput email required placeholder="Email Address">
+          <mat-error class="message-block" *ngIf="email.touched && email.invalid">
+              <small *ngIf="email.hasError('required')">Email is required</small>
+              <small *ngIf="email.hasError('email')">Email is invalid</small>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-checkbox
+          [(ngModel)] = "formData.rememberMe"
+          name="rememberMe"
+          checked="false"
+          >
+            <small>
+              Remember me
+            </small>
+        </mat-checkbox>
+        <mat-icon 
+          matTooltip="This email will be used for other Votes. You can clear this from the menu bar"
+          class="md-18" 
+          >help
+        </mat-icon>
+
+        <br>
+
+        <mat-checkbox
+          [(ngModel)] = "formData.agree"
+          name="agree"
+          required
+          checked="false"
+          >
+          <small (click)="displayTerms()" style="cursor: pointer; color: blue; text-decoration: underline">
+              I agree to Eco Terms and conditions
+            </small>
+        </mat-checkbox>
+        
+     </div>
+
+   </form>
+ </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="(f.invalid || likeLoader || !formData.agree)" (click)="sendLike(f)">
+    Vote Problem 
+    <mat-icon *ngIf="likeLoader" class="pt-1 pl-1"><mat-spinner [diameter]="15" ></mat-spinner></mat-icon>
+  </button>
+</mat-dialog-actions>

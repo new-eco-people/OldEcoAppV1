@@ -1,0 +1,15 @@
+.circle-avatar{
+    border-radius: 50%;
+}
+.main{
+
+    width: 200px;
+}
+
+.bg-primary-eco {
+    background-color:  rgba(112, 179, 112, 0.92);
+}
+
+.odemeter-class {
+    margin-bottom: 12px;
+}

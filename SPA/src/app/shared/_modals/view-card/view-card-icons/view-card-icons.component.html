@@ -1,0 +1,36 @@
+<div class="inline-items border-top" fxLayout fxLayoutGap="10px">
+              
+
+    <!-- Icons with digits -->
+
+    <!-- Like Icon -->
+   <a disable="true" href="#" (click)="VoteProblem($event)" class="post-add-icon inline-items">
+     <mat-icon class="md-18 mr-1">pan_tool</mat-icon>
+     <span> {{ problem._.likes }} </span> <mat-icon *ngIf="VoteLoader" class="pt-1 pl-1"><mat-spinner [diameter]="15" ></mat-spinner></mat-icon>
+   </a>
+
+   <!-- Comment Icon -->
+  <!-- <a disable="true" href="#" (click)="toggleComment($event)" class="post-add-icon inline-items" 
+  [ngClass]="{'text-primary': (isComment | async)}"
+  >
+     <mat-icon class="md-18 mr-1">message</mat-icon>
+     <span> {{ problem._.comments }} </span>
+   </a> -->
+
+   <!-- Idea Icon -->
+   <a disable="true" href="#" (click)="toggleComment($event)" class="post-add-icon inline-items"
+   >
+        <mat-icon class="md-18 mr-1 rotate-180">wb_incandescent</mat-icon>
+       <span> {{ problem._.ideas }} </span>
+   </a>
+
+
+    <div class="comments-shared">
+
+      <a [href]="problem._.projects[0]?.webLink" target="_blank" *ngIf="problem._.projects && problem._.projects?.length > 0" class="post-add-icon inline-items">
+        <svg class="olymp-share-icon"><use xlink:href="/assets/svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+      </a>
+    </div>
+
+
+  </div>

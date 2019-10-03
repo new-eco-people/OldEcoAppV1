@@ -1,0 +1,66 @@
+
+
+  <div class="tab-pane" >
+      <div class="title h6">Be part of ECO</div>
+      <form class="content" #f="ngForm" [formGroup]="signUpForm" (ngSubmit)="signUpUser(f)" >
+        <div class="row">
+
+          <div class="col col-12">
+              <mat-form-field>
+                  <input 
+                    type="email" 
+                    matInput 
+                    formControlName="email"
+                    placeholder="Your Email *">
+
+                    <mat-hint *ngIf="(emailAvailabileLoader | async)" ><mat-spinner [diameter]="20" ></mat-spinner></mat-hint>
+        
+                    <mat-error class="message-block" *ngIf="signUpForm.get('email').touched && signUpForm.get('email').invalid">
+                        <small *ngIf="signUpForm.get('email').hasError('required')">Email is required</small>
+                        <small *ngIf="signUpForm.get('email').hasError('email')">Email is invalid</small>
+                        <small *ngIf="signUpForm.get('email').hasError('unique')">Email has been taken</small>
+                    </mat-error>
+                </mat-form-field>
+          </div>
+
+          <div class="col col-12">
+              <mat-form-field>
+                  <input 
+                    type="password"
+                    matInput 
+                    formControlName="password"
+                    placeholder="Your Password *">
+        
+                    <mat-error class="message-block" *ngIf="signUpForm.get('password').touched && signUpForm.get('password').invalid">
+                        <small *ngIf="signUpForm.get('password').hasError('required')">Pasword is required</small>
+                        <small *ngIf="signUpForm.get('password').hasError('pattern')">Min of 8 chars including one capital letter, number and special character</small>
+                    </mat-error>
+                </mat-form-field>
+          </div>
+
+          <div class="col col-12">
+              <mat-form-field>
+                  <input 
+                    type="password" 
+                    matInput 
+                    formControlName="confirmPassword"
+                    placeholder="Confirm Password *">
+        
+                    <mat-error class="message-block" *ngIf="signUpForm.get('confirmPassword').touched && signUpForm.get('confirmPassword').invalid">
+                        <small *ngIf="signUpForm.get('confirmPassword').hasError('required')">Pasword is required</small>
+                        <small *ngIf="signUpForm.get('confirmPassword').hasError('invalidConfirmWith')">Passwords do not match</small>
+                    </mat-error>
+                </mat-form-field>
+          </div>
+
+          <div class="col col-12">
+                <mat-checkbox color="primary" formControlName="terms" ><small>I Agree to ECO Terms and Condition</small></mat-checkbox>
+          </div>
+
+          <div class="col col-12">
+              <button mat-raised-button color="primary" class="btn-lg full-width" [disabled]="(signUpForm.invalid || (emailAvailabileLoader | async))">Lets do it!!</button>
+          </div>
+
+        </div>
+      </form>
+    </div>

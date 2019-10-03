@@ -1,0 +1,43 @@
+<form #f="ngForm" (ngSubmit)="ResendEmailConfirmation(f)" class="modal-form">
+    <h1 mat-dialog-title>Resend email confirmation link</h1>
+    
+    <div mat-dialog-content>
+        <mat-form-field>
+          <input 
+          matInput 
+          ngModel 
+          #email="ngModel"
+          required
+          email
+          name="email"
+          placeholder="Email" type="email">
+          <mat-hint>Get an email confirmation sent to you</mat-hint>
+    
+          <mat-error class="message-block" *ngIf="email.touched && email.invalid">
+              <small *ngIf="email.hasError('required')">Email is required</small>
+              <small *ngIf="email.hasError('email')">Email is invalid</small>
+          </mat-error>
+    
+        </mat-form-field>
+    </div>
+    
+    <div mat-dialog-actions>
+      <button mat-raised-button type="button" (click)="cancelForget()" color="warn">Cancel</button>
+    
+      <button
+       mat-raised-button 
+       type="submit" 
+       color="primary" 
+       [disabled]="(f.invalid || searching)"> 
+    
+        Send Link 
+        <mat-icon *ngIf="searching"> 
+        <mat-spinner [diameter]="20" ></mat-spinner>
+        </mat-icon>
+        
+      </button>
+    
+    </div>
+    
+    
+    </form>

@@ -1,0 +1,9 @@
+
+mat-form-field {
+    width: 100%;
+  }
+
+.mk-pointer :hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

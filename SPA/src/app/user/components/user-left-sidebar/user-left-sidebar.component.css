@@ -1,0 +1,59 @@
+.fixed-sidebar {
+    top: 0px;
+    left: 270px;
+}
+
+.main-parent {
+    background-color: #fff;
+    width: 230px;
+    position: fixed;
+    height: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none; 
+    /* overflow: auto; */
+}
+
+.main-parent::-webkit-scrollbar { width: 0 !important }
+
+.custom-card-header {
+    padding-left: 25px;
+    margin-bottom: 0;
+    color: inherit;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.spacer {
+    height: 15px;
+}
+
+.sidenav-menu > li > a {
+    font-size: 14px;
+}
+
+.main-menu {
+    height: 100%;
+}
+
+.menu-button {
+    position: fixed;
+    top: calc(50% - 25px);
+    left: -6px;
+    width: 40px;
+    height: 40px;
+    background-color: #7c5ac2;
+    padding-top: 7px;
+    z-index: 999;
+    border-radius: 0 100px 100px 0;
+    -webkit-box-shadow: 5px 1px 7px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 1px 7px -3px rgba(0,0,0,0.75);
+    box-shadow: 5px 1px 7px -3px rgba(0,0,0,0.75);
+}
+
+.sidebar-heading > a {
+    color: #fff;
+}
+
+.sidebar-heading > a:hover{
+    text-decoration: none;
+}

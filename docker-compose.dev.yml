@@ -1,0 +1,50 @@
+version: "3.4"
+
+services:
+
+
+  postgres_image:
+    image: postgres:11.5-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "root_user"
+      POSTGRES_PASSWORD: "root_password"
+      POSTGRES_DB: "app_db"
+
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "80:80"
+
+  backend:
+    build:
+      context: ./API
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./API:/app
+      - /API/bin/
+      - /API/obj/
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DefaultConnection=host=postgres_image;port=5432;database=app_db;username=root_user;password=root_password
+    depends_on:
+      - postgres_image
+    ports:
+      - "5000:5000"
+  
+  frontend:
+    build:
+      context: ./SPA
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./SPA:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200"
+
+    # host={};port={};database={};username={};password={};SSL Mode=Require;Trust Server Certificate=true
+  

@@ -1,0 +1,35 @@
+<div class="post__author author vcard inline-items">
+         
+    <div class="author-date">
+      <span class="h6 post__author-name fn">
+         {{ problem.fullName() }}
+      </span> Posted {{ problem.humanTime() }}
+      <div class="post__date">
+        <small>
+          
+          <span class="eco bg-success"
+            [matTooltip]="problem.getEco()"
+            aria-label=""
+          >
+            {{problem._.eco?.toUpperCase()}}
+          </span>
+          
+          <span class="ico bg-danger"
+            [matTooltip]="problem.getIco()"
+            aria-label=""
+          >{{ problem.getIcoTag() }}</span>
+
+          <span class="un-goals bg-primary"
+             *ngIf="problem._.ecoUnOther"
+             [matTooltip]="problem._.ecoUnOther"
+            aria-label="">
+            {{ problem.data.unGoals.tag }}
+          </span>
+          
+          &nbsp; in {{ problem._.country?.name }}, {{ problem._.state?.name }}
+        
+        </small>
+      </div>
+    </div>
+
+  </div>

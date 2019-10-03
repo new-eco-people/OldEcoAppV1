@@ -1,0 +1,7 @@
+
+.container-fluid {
+    padding: 0px;
+    max-width: 1400px;
+    position: relative;
+    overflow: hidden;
+}

@@ -1,0 +1,57 @@
+
+
+<div class="header-spacer"></div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a [routerLink]="['/']">
+			<img src="/assets/img/ecoworld.png" class="eco-logo">
+		</a>
+
+		<div class="text-white mx-sm-5">
+				<span><mat-icon  class="text-primary">tag_faces</mat-icon> <span class="badge badge-pill badge-primary badge-fz-8">15</span></span>
+				<span><mat-icon  class="text-success">flash_on</mat-icon> <span class="badge badge-pill badge-success badge-fz-8">15</span></span>
+		</div>
+
+		<button class="navbar-toggler collapsed" (click)="toggleMobileMenu()" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	
+		<div class="navbar-collapse collapse">
+
+			<ul class="navbar-nav mr-auto">
+			</ul>
+
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-primary my-2 my-sm-0 btn-md-2" type="submit">Search</button>
+			</form>
+
+			<div class="nav-item dropdown" [ngClass]="{show: userMenu}">
+				
+				<div class="author-page author vcard inline-items more">
+						<div class="author-thumb" (click)="toggleUserMenu()" style="cursor: pointer">
+							<img alt="author" src="/assets/img/author-page.jpg" class="avatar">
+							<span class="caret-status"><mat-icon class="md-36 text-primary">arrow_drop_down</mat-icon></span>
+						</div>
+						<a href="02-ProfilePage.html">
+								<span class="text-white lead pl-2">
+										Ariweriokuma
+								</span>
+							</a>
+					</div>
+
+					<div class="dropdown-menu" [ngClass]="{show: userMenu}" (click)="toggleUserMenu()" (mouseleave)="toggleUserMenu()" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">Action</a>
+						<a class="dropdown-item" href="#">Another action</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Something else here</a>
+					</div>
+			</div>
+
+		</div>
+	</nav>
+
+
+	<div class="message-button text-white" fxLayout="column" fxLayoutAlign="center center">
+			<span class="badge badge-pill badge-success badge-fz-8">15</span> <mat-icon class="md-18" >message</mat-icon>
+		</div>

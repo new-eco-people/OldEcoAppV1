@@ -1,0 +1,29 @@
+
+.caption-text p {
+    margin-bottom: 0px;
+    font-size: 1rem;
+}
+
+.caption-text h1 {
+    margin-bottom: 0px;
+    font-size: 5rem;
+}
+
+.emph-word {
+    font-weight: bold;
+    font-size: 42px;
+    color: #3381D6;
+    margin-bottom: 0px;
+}
+
+.landing-content  h1 {
+    font-size: 3rem;
+}
+
+.numbers-count {
+    margin-bottom: -10px;
+}
+
+small.lead {
+    font-size: 1.1rem;
+}
