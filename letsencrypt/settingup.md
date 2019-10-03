@@ -21,3 +21,8 @@
 
 
 7. Configure CI/CD using GitLab https://medium.com/@sean_bradley/auto-devops-with-gitlab-ci-and-docker-compose-f931233f080f and https://docs.gitlab.com/runner/register/index.html
+
+
+For gitlab runner after making it a sudoer type
+
+sudo usermod -a -G sudo gitlab-runner
