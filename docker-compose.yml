@@ -4,7 +4,7 @@ services:
 
   nginx:
     restart: always
-    image: newecopeoplev1/old_nginx_dev
+    image: newecopeoplev1/old_nginx_dev:latest
     ports:
       - "80:80"
       - "443:443"
@@ -15,7 +15,7 @@ services:
       - /docker-volumes/data/letsencrypt:/data/letsencrypt
 
   backend:
-    image: newecopeoplev1/old_backend_dev
+    image: newecopeoplev1/old_backend_dev:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - DefaultConnection=${POSTGRES_CONNECTION_STRING}
@@ -23,7 +23,21 @@ services:
       - "5000"
   
   frontend:
-    image: newecopeoplev1/old_frontend_dev
+    image: newecopeoplev1/old_frontend_dev:latest
     ports:
       - "4200"
-  
+
+  webhook:
+    restart: unless-stopped
+    image: staticfloat/docker-webhook
+    volumes:
+        # Mount this code into /code
+        - ./letsencrypt:/code
+        # Mount the docker socket
+        - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+        - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+        - WEBHOOK_HOOKS_DIR=/code/hooks
+        - WEBHOOK_BRANCH_LIST=develop
+    expose:
+        - 8000

@@ -21,6 +21,7 @@
 
 
 7. Configure CI/CD using GitLab https://medium.com/@sean_bradley/auto-devops-with-gitlab-ci-and-docker-compose-f931233f080f and https://docs.gitlab.com/runner/register/index.html
+    Or try using webhooks https://github.com/adnanh/webhook and https://willbrowning.me/setting-up-automatic-deployment-and-builds-using-webhooks/
 
 
 For gitlab runner after making it a sudoer type
