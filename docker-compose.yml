@@ -27,3 +27,17 @@ services:
     ports:
       - "4200"
   
+  webhook:
+    restart: unless-stopped
+    image: staticfloat/docker-webhook
+    volumes:
+        # Mount this code into /code
+        - ./:/letsencrypt
+        # Mount the docker socket
+        - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+        - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+        - WEBHOOK_HOOKS_DIR=/letsencrypt/hooks
+        - WEBHOOK_BRANCH_LIST=master
+    expose:
+        - 8000
