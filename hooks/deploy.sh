@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-# redirect stdout/stderr to a file
+#!/usr/bin
+
 giturl=".git"
 api_image="newecopeoplev1/old_backend_dev:latest"
 nginx_image="newecopeoplev1/old_nginx_dev:latest"

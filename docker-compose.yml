@@ -32,7 +32,7 @@ services:
     image: staticfloat/docker-webhook
     volumes:
         # Mount this code into /code
-        - ./letsencrypt:/code
+        - ./:/code
         # Mount the docker socket
         - /var/run/docker.sock:/var/run/docker.sock
     environment:
