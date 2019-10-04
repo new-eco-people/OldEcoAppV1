@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
-# redirect stdout/stderr to a file
-giturl=".git"
+#!/usr/bin
+
+giturl="https://github.com/new-eco-people/OldEcoAppV1.git"
 api_image="newecopeoplev1/old_backend_dev:latest"
 nginx_image="newecopeoplev1/old_nginx_dev:latest"
 front_image="newecopeoplev1/old_frontend_dev:latest"
@@ -15,6 +15,10 @@ cd /home/agent/app/
 #     git clone $giturl .
 #     git checkout develop
 # fi
+
+git pull
+
+git checkout develop
 
 docker-compose down
 
