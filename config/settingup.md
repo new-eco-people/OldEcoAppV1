@@ -11,6 +11,7 @@
 7. Create user and give sudo privilidge
     https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-ubuntu-quickstart
     https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04
+    https://www.digitalocean.com/community/tutorials/how-to-add-delete-and-grant-sudo-privileges-to-users-on-a-debian-vps
     su - username
 
 6. Add lets encrypt for ssl certificate
@@ -23,6 +24,16 @@
 7. Configure CI/CD using GitLab https://medium.com/@sean_bradley/auto-devops-with-gitlab-ci-and-docker-compose-f931233f080f and https://docs.gitlab.com/runner/register/index.html
     Or try using webhooks https://github.com/adnanh/webhook and https://willbrowning.me/setting-up-automatic-deployment-and-builds-using-webhooks/
     https://github.com/staticfloat/docker-webhook
+    https://github.com/schickling/docker-hook - also install pyton on root
+
+    https://hub.docker.com/r/nilbus/docker-hook/
+    docker run \
+  --name docker-hook \
+  -p 8555:8555 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /home/username/deploy.sh:/deploy.sh \
+  nilbus/docker-hook -t key -c sh /deploy.sh
+
 
 
 For gitlab runner after making it a sudoer type
