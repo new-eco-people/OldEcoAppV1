@@ -6,7 +6,9 @@ services:
     image: newecopeoplev1/old_backend_dev:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - DefaultConnection=${POSTGRES_CONNECTION_STRING}
+      - DefaultConnection
+      - SENDGRID_APIKEY
+      - CLOUDINARY_DETAILS
     ports:
       - "5000:5000"
   
