@@ -76,8 +76,8 @@ switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
 		echo 'pong';
 		break;
         case 'push':
-                echo 'Thanks for the info :)';
-                shell_exec('sudo -E /home/agent/hooks/redeploy-github-hook.sh > /tmp/redeploy_docker.txt & printf "%u" $!');
+        echo 'w/orking push command';
+        shell_exec('sudo -E /home/agent/hooks/redeploy-github-hook.sh > /tmp/redeploy_docker.txt & printf "%u" $!');
         
 		break;
 //	case 'create':

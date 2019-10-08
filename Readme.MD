@@ -15,7 +15,7 @@ Steps to my application using digital ocean
 
    configure nginx server block for domain.com at
 
-   sudo nano /etc/nginx/sites-available/domain.com
+   nano /etc/nginx/sites-available/domain.com
 
 upstream frontend {
     server 0.0.0.0:4200;
@@ -72,7 +72,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysq
         you may also chmod 755 /home/agent/hooks/redeploy-github-hook.sh
         
 
-9. sudo nano /var/www/html/__webhook.php
+9. sudo nano /var/www/html/webhook.php
 
 you may also chown root:root /var/www/html/__webhook.php
 
