@@ -23,7 +23,7 @@ $timePushedExpires = 2; # Dont redeploy when time exceeds 2mins
 
 set_error_handler(function($severity, $message, $file, $line) {
         throw new \ErrorException($message, 0, $severity, $file, $line);
-});
+});.
 
 set_exception_handler(function($e) {
         echo "Error {$e->getLine()}: " . htmlSpecialChars($e->getMessage());
@@ -80,7 +80,7 @@ switch ($_SERVER['CONTENT_TYPE']) {
 $payload = json_decode($json);
 switch (strtolower($_SERVER['HTTP_X_GITHUB_EVENT'])) {
         case 'push':
-                echo 'working push command';
+                echo 'w/orking push command';
                 shell_exec('sudo -E /home/agent/hooks/redeploy-github-hook.sh > /tmp/redeploy_docker.txt & printf "%u" $!');
         break;
 //              case 'push':
