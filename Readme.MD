@@ -74,7 +74,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysq
 
 9. sudo nano /var/www/html/__webhook.php
 
-you may also chown root:root /var/www/html/webhook.php
+you may also chown root:root /var/www/html/__webhook.php
 
 10. copy content from config/webhook.php to /var/www/html/webhook.php
         make sure to read the parameter at the top of the php file to set desired parameters
