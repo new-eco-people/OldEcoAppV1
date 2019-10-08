@@ -1,13 +1,5 @@
 #!/bin/bash
 
-
-
-echo "******************** Set Environment Variables ******************************"
-export "DefaultConnection"=$1
-export  "SENDGRID_APIKEY"=$2
-export "CLOUDINARY_DETAILS"=$3
-
-
 echo "******************** Starting redeploy script ******************************"
 giturl="https://github.com/new-eco-people/OldEcoAppV1.git"
 api_image="newecopeoplev1/old_backend_dev:latest"
@@ -31,11 +23,13 @@ then
     sudo git clone $giturl $app_path
 fi
 
-echo "******************** Switching to desired branch you can set this in the redeploy-github-hook.sh ******************************"
-sudo git checkout develop
+cd $app_path
 
 echo "******************** Get updated pull ******************************"
 sudo git pull
+
+echo "******************** Switching to desired branch you can set this in the redeploy-github-hook.sh ******************************"
+sudo git checkout develop
 
 echo "******************** Shutting down docker-compose ******************************"
 sudo -E docker-compose -f "${app_path}/${docker_compose_file}" down
