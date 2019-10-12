@@ -1,0 +1,21 @@
+<div class="border-top container-fluid bg-white py-4 text-center">
+
+  <button
+    (click)="clickedGoBack()"
+    mat-raised-button color="primary"
+    class="text-white float-left"
+    [disabled]="beginning"
+    type="button">
+    <mat-icon class="md-48">keyboard_arrow_left</mat-icon></button>
+
+      <span class="lead">{{ position }} of 7</span>
+
+  <button
+    (click)="clickedGoNext()"
+    [disabled]="end"
+    mat-raised-button color="primary"
+    class="text-white float-right"
+    type="button">
+    <mat-icon class="md-48">keyboard_arrow_right</mat-icon></button>
+
+</div>

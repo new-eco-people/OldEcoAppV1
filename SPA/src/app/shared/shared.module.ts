@@ -51,6 +51,10 @@ import { TokenService } from './_services/token.service';
 import { UserService } from './_services/user.service';
 import { DefaultTemplateComponent } from './_toasters/default-template/default-template.component';
 import { CommonValidations } from './_validations/common-validations';
+import { PublicShareIdeaComponent } from '../public/components/public-home/public-share-idea/public-share-idea.component';
+import { PublicIdeasComponent } from '../public/components/public-home/public-ideas/public-ideas.component';
+import { ShareIdeaFormStructure } from './form-data-structures/share-idea-form-structure';
+import { NavigateFormComponent } from '../public/components/navigate-form/navigate-form.component';
 
 
 
@@ -84,6 +88,9 @@ import { CommonValidations } from './_validations/common-validations';
         ProblemHeadingInfoComponent,
         ViewCardIconsComponent,
         CommentIdeaChatBoxComponent,
+        PublicShareIdeaComponent,
+        PublicIdeasComponent,
+        NavigateFormComponent
     ],
 
     providers: [
@@ -99,6 +106,7 @@ import { CommonValidations } from './_validations/common-validations';
         { provide: ErrorHandler, useClass: AppErrorHandler },
         LocationService,
         ShareProblemFormStructure,
+        ShareIdeaFormStructure,
         CommentService
     ],
 
@@ -128,7 +136,10 @@ import { CommonValidations } from './_validations/common-validations';
         ReactiveFormsModule,
         ParticlesModule,
         RouterModule,
-        CustomFormsModule
+        CustomFormsModule,
+        PublicShareIdeaComponent,
+        PublicIdeasComponent,
+        NavigateFormComponent
     ],
     entryComponents : [
         ForgottenPasswordComponent,

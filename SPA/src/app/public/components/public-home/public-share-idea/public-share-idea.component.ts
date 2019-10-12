@@ -1,35 +1,32 @@
-import { TermsAndConditionComponent } from './../../../../shared/_modals/terms-and-condition/terms-and-condition.component';
-import { ImageFormStructure } from '../../../../shared/form-data-structures/image-form-structure';
-import { LocationService } from './../../../../shared/_services/location.service';
-import { AppToken } from './../../../../core/app-domain/app-token';
-import { UserActionConstant } from './../../../../core/state-management/user-state/user-action-constant';
-import { ToasterService } from './../../../../shared/_services/toaster.service';
-import { ProblemService } from './../../../../shared/_services/problem.service';
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import * as _ from 'lodash';
-import { finalize } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { NgRedux, select } from '@angular-redux/store';
-import { IAppState } from 'src/app/core/state-management/store';
+import { Component, OnInit } from '@angular/core';
+import { ImageFormStructure } from 'src/app/shared/form-data-structures/image-form-structure';
+import { AppToken } from 'src/app/core/app-domain/app-token';
 import { Subscription } from 'rxjs';
-import { ShareProblemFormStructure } from 'src/app/shared/form-data-structures/share-problem-form-structure';
+import { ProblemService } from 'src/app/shared/_services/problem.service';
+import { ToasterService } from 'src/app/shared/_services/toaster.service';
+import { IAppState } from 'src/app/core/state-management/store';
+import { LocationService } from 'src/app/shared/_services/location.service';
+import { Router } from '@angular/router';
+import { NgRedux } from '@angular-redux/store';
 import { MatDialog } from '@angular/material';
+import { UserActionConstant } from 'src/app/core/state-management/user-state/user-action-constant';
+import { finalize } from 'rxjs/operators';
+import * as _ from 'lodash';
+import { TermsAndConditionComponent } from 'src/app/shared/_modals/terms-and-condition/terms-and-condition.component';
+import { ShareIdeaFormStructure } from 'src/app/shared/form-data-structures/share-idea-form-structure';
 
 @Component({
-  selector: 'app-public-share-problems',
-  templateUrl: './public-share-problems.component.html',
-  styleUrls: ['./public-share-problems.component.css']
+  selector: 'app-public-share-idea',
+  templateUrl: './public-share-idea.component.html',
+  styleUrls: ['./public-share-idea.component.css']
 })
-export class PublicShareProblemsComponent implements OnInit, OnDestroy {
+export class PublicShareIdeaComponent implements OnInit {
 
   uploadingProblem = false;
   loadingCountry = false;
   loadingState = false;
 
   imageData: ImageFormStructure = new ImageFormStructure();
-  // ShareProblemFormData: ShareProblemFormStructure;
-
 
   position = 0;
   formSurvey = [true, false, false, false, false, false, false];
@@ -43,24 +40,20 @@ export class PublicShareProblemsComponent implements OnInit, OnDestroy {
     private router: Router,
     private redux: NgRedux<IAppState>,
     private locationService: LocationService,
-    public ShareProblemFormData: ShareProblemFormStructure,
+    public ShareIdeaFormData: ShareIdeaFormStructure,
     private dialog: MatDialog
-    ) {
-    }
+  ) { }
 
   ngOnInit() {
     this.setUser();
     this.getCountries();
   }
 
-
   createProblem() {
 
-    // console.log(this.ShareProblemFormData.data);
+  this.uploadingProblem = true;
 
-    this.uploadingProblem = true;
-
-    this.problemService.save(this.ShareProblemFormData.data)
+  this.problemService.save(this.ShareIdeaFormData.data)
     .pipe(finalize(() => this.uploadingProblem = false))
     .subscribe((token: any) => {
       this.toasterService.success('Thanks, Your problem has been shared. You can also view other problems');
@@ -69,10 +62,9 @@ export class PublicShareProblemsComponent implements OnInit, OnDestroy {
         this.redux.dispatch({ type: UserActionConstant.SAVE_AUTH_USER, token: token.token });
       }
 
-      this.ShareProblemFormData.data = Object.assign({});
+      this.ShareIdeaFormData.data = Object.assign({});
       this.router.navigate(['problems']);
     });
-    // console.log(f.value);
   }
 
   goNext() {
@@ -97,15 +89,15 @@ export class PublicShareProblemsComponent implements OnInit, OnDestroy {
   }
 
   setUser() {
-    // this.user = this.redux.getState().user.token;
     this.userSubScription = this.redux.select(s => s.user.token).subscribe(token => {
+      console.log(token)
       if (!token) {
         this.defaultUser = {} as AppToken;
         return;
       }
 
       this.defaultUser = token;
-      Object.assign(this.ShareProblemFormData.data, _.pick(this.defaultUser, ['firstName', 'lastName', 'email']));
+      Object.assign(this.ShareIdeaFormData.data, _.pick(this.defaultUser, ['firstName', 'lastName', 'email']));
 
     });
   }
@@ -117,13 +109,13 @@ export class PublicShareProblemsComponent implements OnInit, OnDestroy {
       .pipe(finalize(() => this.loadingCountry = false))
 
       .subscribe((countries: any) => {
-        this.ShareProblemFormData.countries = countries;
+        this.ShareIdeaFormData.countries = countries;
       });
   }
 
   getState(country: number) {
     if (!country) {
-      this.ShareProblemFormData.states = [];
+      this.ShareIdeaFormData.states = [];
       return;
     }
     console.log(country);
@@ -135,7 +127,7 @@ export class PublicShareProblemsComponent implements OnInit, OnDestroy {
       .pipe(finalize(() => this.loadingState = false))
 
       .subscribe((states: any) => {
-        this.ShareProblemFormData.states = states;
+        this.ShareIdeaFormData.states = states;
       });
 
   }
@@ -151,4 +143,5 @@ export class PublicShareProblemsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.userSubScription.unsubscribe();
   }
+
 }

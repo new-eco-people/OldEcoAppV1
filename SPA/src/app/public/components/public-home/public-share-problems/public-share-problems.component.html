@@ -13,17 +13,17 @@
       <form #f="ngForm" (ngSubmit)="createProblem()" class="col col-12" enctype="multipart/form-data">
 
 
-        
+        <!-- Location of the problem -->
           <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[0]}">
               <div class="ui-block-title">
                   <h1 class="title">Location of the Problem</h1>
               </div>
               <div>
-  
+
               <div class="col col-12 py-3 my-3">
-  
+
                 <mat-form-field>
-                  <mat-select 
+                  <mat-select
                     (selectionChange)="getState(ShareProblemFormData.data.countryId)"
                     name="country"
                     required
@@ -38,13 +38,13 @@
                       <mat-icon ><mat-spinner *ngIf="loadingCountry" [diameter]="15" ></mat-spinner></mat-icon>
                     </mat-hint>
                 </mat-form-field>
-  
+
               </div>
 
               <div class="col col-12 py-3 my-3">
-  
+
                   <mat-form-field>
-                    <mat-select 
+                    <mat-select
                       name="state"
                       required
                       [(ngModel)] = "ShareProblemFormData.data.stateId"
@@ -57,21 +57,21 @@
                         <mat-icon ><mat-spinner *ngIf="loadingState" [diameter]="15" ></mat-spinner></mat-icon>
                       </mat-hint>
                   </mat-form-field>
-    
+
                 </div>
-  
-              
+
+
               </div>
             </div>
 
 
-            
 
 
 
 
 
 
+            <!-- Type of Problem -->
             <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[1]}">
               <div class="ui-block-title">
                   <h1 class="title">Type of ECO problem</h1>
@@ -98,7 +98,7 @@
 
 
 
-
+            <!-- Ungoals -->
             <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[2]}">
               <div class="ui-block-title">
                   <h1 class="title">UN goals for {{ShareProblemFormData.ecoUnDisplay?.name}} problems </h1>
@@ -108,26 +108,26 @@
                 <div class="col col-12 py-3 my-3">
 
                   <mat-form-field>
-                    <mat-select 
+                    <mat-select
                       placeholder="UN goals"
                       required
-                      [(ngModel)] = "ShareProblemFormData.data.ecoUn" 
+                      [(ngModel)] = "ShareProblemFormData.data.ecoUn"
                       name="ecoUn">
                         <mat-option value="" ></mat-option>
                         <mat-option *ngFor="let item of ShareProblemFormData.ecoUnDisplay?.unGoals" [value]="item" >{{item}}</mat-option>
                     </mat-select>
                     <mat-hint>UN goals related to the {{ShareProblemFormData.ecoUnDisplay?.name}}</mat-hint>
                   </mat-form-field>
-    
-    
+
+
                   <mat-form-field>
-                    <input 
-                      [(ngModel)]="ShareProblemFormData.data.ecoUnOther" 
-                      name="ecoUnOther" 
-                      matInput 
+                    <input
+                      [(ngModel)]="ShareProblemFormData.data.ecoUnOther"
+                      name="ecoUnOther"
+                      matInput
                       placeholder="If type of UN goal is not listed, type yours" maxlength="50">
                   </mat-form-field>
-                  
+
                 </div>
 
               </div>
@@ -135,21 +135,21 @@
 
 
 
-
+            <!-- Who suffers -->
             <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[3]}">
               <div class="ui-block-title">
                   <h1 class="title">Who suffers from such problems</h1>
               </div>
               <div class="ui-block-content">
-  
+
 
                 <div class="col col-12 py-3 my-3">
 
 
                   <mat-form-field>
-                    <mat-select 
+                    <mat-select
                       [(ngModel)] = "ShareProblemFormData.data.ico"
-                      name="ico" 
+                      name="ico"
                       placeholder="This problem affects...">
                       <mat-option *ngFor="let item of ShareProblemFormData.icos" [value]="item.value" >{{item.name}}</mat-option>
                     </mat-select>
@@ -157,21 +157,22 @@
                   </mat-form-field>
 
                   <mat-form-field>
-                    <input 
-                      name="icoOther" 
-                      matInput 
+                    <input
+                      name="icoOther"
+                      matInput
                       [(ngModel)]="ShareProblemFormData.data.icoOther"
-                      placeholder="Other" 
+                      placeholder="Other"
                       maxlength="50">
                     <mat-hint>Add more description</mat-hint>
                   </mat-form-field>
-              
+
                 </div>
 
               </div>
             </div>
 
 
+            <!-- Description -->
             <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[4]}">
               <div class="ui-block-title">
                   <h1 class="title">Description of the Problem</h1>
@@ -182,19 +183,19 @@
 
 
                   <mat-form-field>
-                    <textarea 
-                      name="description" 
-                      [(ngModel)] = "ShareProblemFormData.data.description" 
+                    <textarea
+                      name="description"
+                      [(ngModel)] = "ShareProblemFormData.data.description"
                       required
-                      matInput 
+                      matInput
                       #desc = "ngModel"
-                      placeholder="Description of the problem" 
-                      maxlength="1000" 
+                      placeholder="Description of the problem"
+                      maxlength="1000"
                       cols="4"
                       > </textarea>
                       <mat-hint> {{ desc.value?.length }}/1000 </mat-hint>
                   </mat-form-field>
-                    
+
                 </div>
 
               </div>
@@ -202,17 +203,17 @@
 
 
 
-            <!-- [ngClass]="{'d-none': !formSurvey[5]}" -->
+            <!-- Images -->
             <div class="col col-12 bg-white" [ngClass]="{'d-none': !formSurvey[5]}">
               <div class="ui-block-title">
                   <h1 class="title">Upload Pictures <small class="lead">{{ ShareProblemFormData.data.images?.length }}/5</small></h1>
               </div>
 
                 <ngx-img (onSelect)="ShareProblemFormData.storeTempFile($event)" #ngxImg [config]="imageData.options"></ngx-img>
-                <button 
-                  type="button" 
-                  [disabled]="(!ShareProblemFormData.file || ShareProblemFormData.data.images?.length >= 6)" 
-                  class="my-2 full-width btn btn-md c-white btn-primary" 
+                <button
+                  type="button"
+                  [disabled]="(!ShareProblemFormData.file || ShareProblemFormData.data.images?.length >= 6)"
+                  class="my-2 full-width btn btn-md c-white btn-primary"
                   (click)="ShareProblemFormData.addImage(); ngxImg.reset()">
                     Add Photo
                   </button>
@@ -223,7 +224,7 @@
                     <img [src]="item" class="img-thumbnail" (click)="ShareProblemFormData.showImage(i)">
                   </div>
                 </div>
-          
+
             </div>
 
             <!-- [ngClass]="{'d-none': !formSurvey[6]}" -->
@@ -241,10 +242,10 @@
                       <input
                         name="firstName"
                         pattern='^[a-zA-Z0-9-_]+$'
-                        matInput 
+                        matInput
                         [(ngModel)]="ShareProblemFormData.data.firstName"
                         #firstName = "ngModel"
-                        placeholder="First Name" 
+                        placeholder="First Name"
                         maxlength="50">
                     </mat-form-field>
                   </div>
@@ -254,10 +255,10 @@
                         <input
                           [(ngModel)]="ShareProblemFormData.data.lastName"
                           pattern='^[a-zA-Z0-9-_]+$'
-                          matInput 
+                          matInput
                           name="lastName"
                           #last_Name = "ngModel"
-                          placeholder="Last Name" 
+                          placeholder="Last Name"
                           maxlength="50">
                         <!-- <mat-hint>If not one of the ICO, kindly let us know</mat-hint> -->
                       </mat-form-field>
@@ -268,21 +269,21 @@
                       <input
                         [(ngModel)]="ShareProblemFormData.data.email"
                         email
-                        matInput 
+                        matInput
                         name="userEmail"
                         #userEmail = "ngModel"
-                        placeholder="Email Address" 
+                        placeholder="Email Address"
                         maxlength="50">
                       <!-- <mat-hint>If not one of the ICO, kindly let us know</mat-hint> -->
                     </mat-form-field>
                   </div>
 
-                  
+
                   <!-- ------------------------------------------- Check boxes ------------------------------------------- -->
-                  <div class="mt-2" 
-                  [ngClass]="{'d-none': 
+                  <div class="mt-2"
+                  [ngClass]="{'d-none':
                   !(
-                    userEmail.value && userEmail.valid && 
+                    userEmail.value && userEmail.valid &&
                     firstName.value && firstName.valid &&
                     last_Name.value && last_Name.valid
                   )}"
@@ -296,13 +297,13 @@
                             Remember Me
                           </small>
                         </mat-checkbox>
-                        <mat-icon 
+                        <mat-icon
                           matTooltip="This email will be used for other likes. You can clear this from the menu bar"
-                          class="md-18" 
+                          class="md-18"
                           >help
                         </mat-icon>
                     </div>
-            
+
                     <div class="col col-12">
                         <mat-checkbox
                         name="addProblemToUser"
@@ -311,11 +312,11 @@
                             Link this problem to my email
                           </small>
                         </mat-checkbox>
-    
-                        <mat-icon 
+
+                        <mat-icon
                         matTooltip="All your problems will be avaliable on your account when eco is launched"
                         aria-label="Button that displays a tooltip when focused or hovered over"
-                        class="md-18" 
+                        class="md-18"
                         >help</mat-icon>
                     </div>
 
@@ -329,11 +330,11 @@
                             Add a project link
                           </small>
                         </mat-checkbox>
-    
-                        <mat-icon 
+
+                        <mat-icon
                         matTooltip="If you have already started a project on this problem, you can share the link"
                         aria-label="Button that displays a tooltip when focused or hovered over"
-                        class="md-18" 
+                        class="md-18"
                         >help</mat-icon>
                     </div>
 
@@ -354,7 +355,7 @@
                           [(ngModel)]="ShareProblemFormData.data.projectLink"
                           #lastName = "ngModel"
                           value="null"
-                          placeholder="Url Link to the project" 
+                          placeholder="Url Link to the project"
                           maxlength="200">
                         <mat-hint>http://www.example.com</mat-hint>
                       </mat-form-field>
@@ -364,8 +365,8 @@
 
                 </div>
               </div>
-              
-            
+
+
               <div class="text-center">
                 <mat-checkbox
                   name="agree"
@@ -380,8 +381,8 @@
 
               <!-- [disabled]="(f.invalid || uploadingProblem)" || !ShareProblemFormData.data.agree -->
             <div class="col col-12 text-center pb-3">
-              <button 
-                class="btn btn-md btn-primary" 
+              <button
+                class="btn btn-md btn-primary"
                 type="submit"
                 [disabled]="(f.invalid || uploadingProblem || !ShareProblemFormData.data.agree)"
               >
@@ -392,35 +393,18 @@
 
           </div>
 
-          
+
           <!-- [disabled]="(f.invalid || uploadingProblem)" -->
-        
 
 
+          <app-navigate-form
+            (goBack)="goBack()"
+            (goNext)="goNext()"
+            [beginning]="formSurvey[0]"
+            [end]="formSurvey[this.formSurvey.length-1]"
+            [position]="this.position+1"
+          ></app-navigate-form>
 
-
-          <div class="border-top container-fluid bg-white py-4 text-center">
-          
-            <button
-              (click)="goBack()"
-              mat-raised-button color="primary" 
-              class="text-white float-left" 
-              [disabled]="formSurvey[0]" 
-              type="button">
-              <mat-icon class="md-48">keyboard_arrow_left</mat-icon></button> 
-
-                <span class="lead">{{ this.position+1 }} of 7</span>  
-
-            <button 
-              (click)="goNext()"
-              [disabled]="formSurvey[this.formSurvey.length-1]"
-              mat-raised-button color="primary" 
-              class="text-white float-right" 
-              type="button">
-              <mat-icon class="md-48">keyboard_arrow_right</mat-icon></button>
-
-					</div>
-        
       </form>
 
 
@@ -428,7 +412,7 @@
 
 
 
-<!-- 
+<!--
     </div>
   </div> -->
 </div>

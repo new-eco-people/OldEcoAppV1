@@ -35,7 +35,6 @@ export class ProjectSlideComponent implements OnInit, OnDestroy {
     this.problemService.getPublic().subscribe((data: any) => {
       // console.log(data);
       if (data) {
-        console.log(data);
         this.problems = data;
         this.problem.props = {...this.problems[0]};
         this.projectSlider();
