@@ -18,7 +18,7 @@ namespace API.Helper.Validations.Annotations
         {
             var s = value as List<string>;
 
-            if(s.Count < 0)
+            if(s == null || s.Count < 0)
                 return null;
 
             if(s.Count >= 6)

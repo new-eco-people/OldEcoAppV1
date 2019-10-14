@@ -29,28 +29,12 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IConfiguration _config;
-        private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
-
-        private readonly Account _cloudinary;
-
-        public ProblemsController(IMapper mapper, IUnitOfWork unitOfWork, IConfiguration config, IOptions<CloudinarySettings> cloudinaryConfig)
+        public ProblemsController(IMapper mapper, IUnitOfWork unitOfWork, IConfiguration config)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _config = config;
-            _cloudinaryConfig = cloudinaryConfig;
-
-            _cloudinary = new Account(
-                _cloudinaryConfig.Value.Name,
-                _cloudinaryConfig.Value.Key,
-                _cloudinaryConfig.Value.Secret
-            );
         }
-
-        // [HttpPost]
-        // public IActionResult CreateProblem(CreateProblemRequestResource createProblemRequestResource) {
-        //     return Ok(createProblemRequestResource);
-        // }
 
         [AllowAnonymous]
         [HttpPost]
@@ -74,7 +58,6 @@ namespace API.Controllers
             // return Ok(createProblemBeteRequestResource.RealImages);
         }
 
-        
         [AllowAnonymous]
         [HttpGet("public")]
          public async Task<IActionResult> GetProblemBetas() {
@@ -128,7 +111,7 @@ namespace API.Controllers
         
         [AllowAnonymous]
         [HttpGet("q")]
-        public async Task<IActionResult> SearchProblrems([FromQuery] SearchProblemRequestResource filter) {
+        public async Task<IActionResult> SearchProblrems([FromQuery] SearchPostRequestResource filter) {
             // System.Threading.Thread.Sleep(3000);
             // var user = await _unitOfWork.Users.GetEntity(TokenFunctions.GetUserId(User));
 
@@ -141,7 +124,7 @@ namespace API.Controllers
 
 
             // var problemResource = _unitOfWork.ProbBeta.ProblemBasedOn(filter);
-            var appFilter = _mapper.Map<ProblemBetaFilter>(filter);
+            var appFilter = _mapper.Map<SearchPostFilter>(filter);
             var problemResource = _mapper.Map<QueryResultResponseResource<ProblemCardBetaResponseResource>>(await _unitOfWork.ProbBeta.ProblemBasedOn(appFilter));
 
             return Ok(problemResource);

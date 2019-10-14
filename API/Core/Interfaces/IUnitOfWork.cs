@@ -15,6 +15,7 @@ namespace API.Core.Interfaces
         ILikeRepository Likes {get; }
         ICommentRepository Comments {get; }
         IIdeaRepository Ideas {get; }
+        IIdeaPostRepository IdeaPosts {get; }
         ILocationRepository Location { get; set; }
         Task<bool> Complete();
     }

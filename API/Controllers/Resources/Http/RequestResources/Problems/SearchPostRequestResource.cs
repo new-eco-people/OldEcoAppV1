@@ -1,9 +1,8 @@
-using System.ComponentModel.DataAnnotations;
 using API.Helper.Validations.Annotations;
 
 namespace API.Controllers.Resources.Http.RequestResources.Problems
 {
-    public class SearchProblemRequestResource
+    public class SearchPostRequestResource
     {
         public string Name { get; set; }
         public int? CountryId { get; set; }

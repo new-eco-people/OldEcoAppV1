@@ -23,6 +23,7 @@ namespace API.Persistence.Repository
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Comment> Comment { get; set; }
         public DbSet<Idea> Idea { get; set; }
+        public DbSet<IdeaPost> IdeaPosts { get; set; }
 
 
         public DataContext(DbContextOptions<DataContext> options)

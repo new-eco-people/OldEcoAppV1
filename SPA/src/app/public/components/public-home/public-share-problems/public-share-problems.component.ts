@@ -126,7 +126,6 @@ export class PublicShareProblemsComponent implements OnInit, OnDestroy {
       this.ShareProblemFormData.states = [];
       return;
     }
-    console.log(country);
 
     this.loadingState = true;
 

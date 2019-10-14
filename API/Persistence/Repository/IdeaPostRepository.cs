@@ -1,49 +1,38 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using API.Controllers.Resources.Http.RequestResources.Problems;
-using API.Controllers.Resources.Http.ResponseResources.Problems;
-using API.Controllers.Resources.Http.ResponseResources.Projects;
-using API.Controllers.Resources.Http.ResponseResources.Users;
+using API.Core.Domain.Application.Request.Idea;
 using API.Core.Domain.Models;
 using API.Core.Interfaces;
 using API.Helper.Functions;
-using API.Helper.Services;
-using AutoMapper;
 using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System.Drawing.Imaging;
 using Microsoft.AspNetCore.Hosting;
-using API.Controllers.Resources.Http.ResponseResources.Photos;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
+using CloudinaryDotNet.Actions;
+using System.IO;
+using System;
+using API.Controllers.Resources.Http.ResponseResources.IdeaPost;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using API.Core.Domain.Models.Application.Response;
 using API.Core.Domain.Models.Application.Request.ProblemBeta;
-using API.Core.Domain.Application.Request.ProblemBeta;
-using Microsoft.EntityFrameworkCore.Query;
 using API.Helper.Extension;
 
 namespace API.Persistence.Repository
 {
-    public class ProblemBetaRepository : Repository<ProblemBeta>, IProblemBetaRepository
+    public class IdeaPostRepository : Repository<IdeaPost>, IIdeaPostRepository
     {
         UserManager<User> _userManager;
         private readonly IHostingEnvironment _env;
         private readonly IUserRepository _user;
         private readonly Cloudinary _cloudinary;
         private readonly string _path;
-
-        public ProblemBetaRepository(
-            DataContext context,  
+        public IdeaPostRepository(
+            DataContext context,
             UserManager<User> userManager,
             IHostingEnvironment env,
             IUserRepository User
-            )
-            : base(context)
+        ) : base(context)
         {
             _userManager = userManager;
             _env = env;
@@ -59,34 +48,35 @@ namespace API.Persistence.Repository
             _path = env.IsDevelopment() ? "dev" : "prod";
         }
 
-        public async Task<User> saveProblemBeta(ProblemBeta problemBeta, CreateProblemBetaRequest createProblemBetaRequest) {
+        public async Task<User> SaveIdeaPost(IdeaPost ideaPost, CreateIdeaPostRequest createIdeaPostRequest) {
 
-            var user = await _user.SaveUser(createProblemBetaRequest);
+            var personalDetails = new PersonalDetail() {
+                FirstName = createIdeaPostRequest.FirstName,
+                LastName = createIdeaPostRequest.LastName
+            };
 
-            if(user != null && createProblemBetaRequest.AddProblemToUser)
-                problemBeta.User = user;
+            var user = await _user.SaveUser(createIdeaPostRequest.Email, personalDetails);
 
-             if(user != null && createProblemBetaRequest.addProjectToProblem) {
-                var Project = new Project() {
+            if (!string.IsNullOrEmpty(createIdeaPostRequest.ProjectLink)) {
+                ideaPost.Projects.Add(new Project() {
                     User = user,
-                    WebLink = createProblemBetaRequest.ProjectLink
-                };
-
-                problemBeta.Projects.Add(Project);
+                    WebLink = createIdeaPostRequest.ProjectLink
+                });
             }
 
-            if (createProblemBetaRequest.RealImages.Count > 0)
-                SaveImages(problemBeta, createProblemBetaRequest);
-            
+            if(createIdeaPostRequest.RealImages.Count > 0) {}
+                // return;
 
-            await _context.AddAsync(problemBeta);
+            await _context.AddAsync(ideaPost);
 
             return user;
         }
 
-        private void SaveImages(ProblemBeta problemBeta, CreateProblemBetaRequest createProblemBetaRequest) {
+
+        private void SaveImages(IdeaPost ideaPost, CreateIdeaPostRequest createProblemBetaRequest) {
 
             var listOfResult = new List<ImageUploadResult>();
+
 
             createProblemBetaRequest.RealImages.ForEach(byteImage => {
 
@@ -106,7 +96,7 @@ namespace API.Persistence.Repository
             
             listOfResult.ForEach(result=> {
                 if (result.PublicId != null) {
-                    problemBeta.Photos.Add( new Photo() {
+                    ideaPost.Photos.Add( new Photo() {
                         PublicId = result.PublicId,
                         Url = result.Uri.AbsoluteUri
                     });
@@ -115,17 +105,14 @@ namespace API.Persistence.Repository
 
         }
 
-        
+        public async Task<IEnumerable<IdeaPostCardRawData>> GetIdeaPostPublic() {
 
-
-        public async Task<IEnumerable<ProblemCardRawData>> GetProblemBetaPublic() {
-
-            var query = getProblemBetDefaultQuery();
+            var query = getIdeaPostQuery();
             // return query;
             return await query.OrderBy(r => r.Comments.Count)
                             .Take(10)
-                            .Select(s => new ProblemCardRawData() {
-                                Problem = s,
+                            .Select(s => new IdeaPostCardRawData() {
+                                IdeaPost = s,
                                 Likes = s.Likes.Count,
                                 Comments = s.Comments.Count,
                                 Ideas = s.Ideas.Count
@@ -134,35 +121,39 @@ namespace API.Persistence.Repository
                             .ToListAsync();
         }
 
-        public async Task<QueryResult<ProblemCardRawData>> ProblemBasedOn(SearchPostFilter filter ) {
+        private IIncludableQueryable<IdeaPost, PersonalDetail> getIdeaPostQuery() {
+            return _context.IdeaPosts
+                .Include(prop => prop.Country)
+                .Include(prop => prop.State)
+                .Include(prop => prop.Photos)
+                .Include(prop => prop.Projects)
+                .Include(prop => prop.User)
+                    .ThenInclude(user => user.PersonalDetail);
+        }
 
-            var result = new QueryResult<ProblemCardRawData>();
-            var query = getProblemBetDefaultQuery()
-                            .OrderByDescending(prop => prop.Likes.Count).AsQueryable();
+        public async Task<QueryResult<IdeaPostCardRawData>> IdeaPostBasedOn(SearchPostFilter filter ) {
+            var result = new QueryResult<IdeaPostCardRawData>();
 
+            var query = getIdeaPostQuery().OrderByDescending(prop => prop.Likes.Count).AsQueryable();
 
-            // Filter query -------------- Use this method for the time being
-            query = FilterProblemBeta(query, filter);
+            query = FilterIdeaPost(query, filter);
 
-            // Get Total items
             result.TotalItems = await query.CountAsync();
 
-            // Pagination
             query = query.AddPagination(filter);
 
-
-            result.Items = await query.Select(s => new ProblemCardRawData() {
-                Problem = s,
+            result.Items = await query.Select(s => new IdeaPostCardRawData() {
+                IdeaPost = s,
                 Likes = s.Likes.Count,
                 Comments = s.Comments.Count,
                 Ideas = s.Ideas.Count
             }).ToListAsync();
 
             return result;
+
         }
 
-        private IQueryable<ProblemBeta> FilterProblemBeta (IQueryable<ProblemBeta> query, SearchPostFilter filter) {
-
+        private IQueryable<IdeaPost> FilterIdeaPost (IQueryable<IdeaPost> query, SearchPostFilter filter) {
             if(filter.CountryId.HasValue)
                 query = query.Where(prop => prop.CountryId == filter.CountryId.Value);
 
@@ -184,24 +175,6 @@ namespace API.Persistence.Repository
                 query = query.Where(prop => prop.EcoUn.ToLower() == filter.EcoUn.ToLower());
 
             return query;
-        }
-
-        private IIncludableQueryable<ProblemBeta, PersonalDetail> getProblemBetDefaultQuery() {
-            return _context.ProblemBeta
-                    .Include(prop => prop.Country)
-                    .Include(prop => prop.State)
-                    .Include(prop => prop.Photos)
-                    .Include(prop => prop.Projects)
-                    // .Include(prop => prop.Comments)
-                        // .ThenInclude(prop => prop.User)
-                        // .ThenInclude(user => user.PersonalDetail)
-                    // .Include(prop => prop.Ideas)
-                    .Include(prop => prop.User)
-                        .ThenInclude(user => user.PersonalDetail);
-                        // .ThenInclude(prop => prop.User)
-                        // .ThenInclude(user => user.PersonalDetail);
-                            
-                            
         }
     }
 }

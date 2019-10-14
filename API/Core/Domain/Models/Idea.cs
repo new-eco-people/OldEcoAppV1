@@ -12,5 +12,7 @@ namespace API.Core.Domain.Models
         public Guid UserId { get; set; }
         public ProblemBeta ProblemBeta { get; set; }
         public Guid ProblemBetaId { get; set; }
+        public IdeaPost IdeaPost { get; set; }
+        public Guid IdeaPostId { get; set; }
     }
 }

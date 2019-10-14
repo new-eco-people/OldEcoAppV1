@@ -114,6 +114,7 @@ namespace API.Controllers
             return Ok(new {data});
         }
 
+        // Like comment by id
         [HttpPost("idea-id")]
         public async Task<IActionResult> AddIdeaViaId(CreateCommentWithIdRequestResource createCommentWithIdRequestResource) {
             var newIdea = _mapper.Map<Idea>(createCommentWithIdRequestResource);
@@ -139,6 +140,7 @@ namespace API.Controllers
             return Ok(data);
         }
 
+        // Get ideas for a comment
         [AllowAnonymous]
         [HttpGet("ideas")]
         public async Task<IActionResult> GetIdeas([FromQuery] GetCommentsRequestResource GetCommentsRequestResource) {

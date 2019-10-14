@@ -10,6 +10,7 @@ namespace API.Core.Domain.Models
         public DateTime DateAdded { get; set; }
         public ProblemBeta ProblemBeta { get; set; }
         public Guid ProblemBetaId { get; set; }
+        public Guid IdeaPostId { get; set; }
         public string PublicId { get; set; }
 
         public Photo()

@@ -15,6 +15,9 @@ using API.Controllers.Resources.Http.RequestResources.Comments;
 using API.Controllers.Resources.Http.ResponseResources.Comments;
 using API.Core.Domain.Application.Request.Comment;
 using API.Controllers.Resources.Http.RequestResources.Hacks;
+using API.Controllers.Resources.Http.RequestResources.Ideas;
+using API.Core.Domain.Application.Request.Idea;
+using API.Controllers.Resources.Http.ResponseResources.IdeaPost;
 
 namespace API.Helper.AutoMapper
 {
@@ -26,6 +29,7 @@ namespace API.Helper.AutoMapper
             // ------- From Model to Resource
             CreateMap<User, UserResponseResource>();
             CreateMap<Project, ProjectResponseResource>();
+            CreateMap<IdeaPost, IdeaPostResponseResource>();
             CreateMap<ProblemBeta, ProblemBetaResponseResource>()
                 .ForMember((prob => prob.Description), config => config.MapFrom((cre => cre.Description.Trim())));
             CreateMap<PersonalDetail, PersonalDetailResponseResource>();
@@ -49,17 +53,23 @@ namespace API.Helper.AutoMapper
                 CreateMap<CreateProblemBeteRequestResource, CreateProblemBetaRequest>()
                     .ForMember((prob => prob.Description), config => config.MapFrom((cre => cre.Description.Trim())));
                     // .ForMember((prob => prob.EcoUn), config => config.MapFrom((cre => cre.EcoUnOther.ToLower())));
-                CreateMap<SearchProblemRequestResource, ProblemBetaFilter>();
-                CreateMap<SearchProblemRequestResource, CommentFilter>();
+                CreateMap<SearchPostRequestResource, SearchPostFilter>();
+                CreateMap<SearchPostRequestResource, CommentFilter>();
 
                 CreateMap<CreateCommentRequestResource, Comment>();
                 CreateMap<CreateCommentRequestResource, Idea>();
                 CreateMap<CreateCommentWithIdRequestResource, Comment>();
                 CreateMap<CreateCommentWithIdRequestResource, Idea>();
 
+                CreateMap<CreateIdeaRequestResource, CreateIdeaPostRequest>()
+                    .ForMember((prob => prob.Description), config => config.MapFrom((cre => cre.Description.Trim())));
+
+
+
 
             //------- From Response to Response
             CreateMap<ProblemCardRawData, ProblemCardBetaResponseResource>();
+            CreateMap<IdeaPostCardRawData, IdeaPostCardResponseResource>();
 
                 // Hacks
                 CreateMap<ProblemCardRawData, ProblemHacksCardResponseResource>();
@@ -68,11 +78,9 @@ namespace API.Helper.AutoMapper
                 CreateMap<Comment, CommentHacksResponseResource>();
                 CreateMap<Idea, CommentHacksResponseResource>();
 
-
-
-
             //--------From Application to Model
             CreateMap<CreateProblemBetaRequest, ProblemBeta>();
+            CreateMap<CreateIdeaPostRequest, IdeaPost>();
 
             //--------From Application to Resource
 

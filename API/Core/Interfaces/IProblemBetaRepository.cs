@@ -17,7 +17,6 @@ namespace API.Core.Interfaces
         Task<User> saveProblemBeta(ProblemBeta problemBeta, CreateProblemBetaRequest createProblemBetaRequest);
 
         Task<IEnumerable<ProblemCardRawData>> GetProblemBetaPublic();
-        Task<QueryResult<ProblemCardRawData>> ProblemBasedOn(ProblemBetaFilter filter);
-        object CountIco();
+        Task<QueryResult<ProblemCardRawData>> ProblemBasedOn(SearchPostFilter filter);
     }
 }

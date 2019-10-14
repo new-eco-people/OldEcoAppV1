@@ -21,6 +21,7 @@ namespace API.Persistence.Repository
         public ILikeRepository Likes { get; private set; }
         public ICommentRepository Comments { get; private set; }
         public IIdeaRepository Ideas { get; private set; }
+        public IIdeaPostRepository IdeaPosts { get; private set; }
 
         public ILocationRepository Location { get; set; }
 
@@ -35,6 +36,7 @@ namespace API.Persistence.Repository
             Comments = new CommentRepository(_context);
             Ideas = new IdeaRepository(_context);
             Location = new LocationRepository(_context);
+            IdeaPosts = new IdeaPostRepository(_context, userManager, env, Users);
         }
 
         // public void Add<T>(T entity) where T : class

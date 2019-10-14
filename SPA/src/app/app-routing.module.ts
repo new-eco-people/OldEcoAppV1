@@ -38,8 +38,8 @@ const routes: Routes = [
       {path: 'about', component: PublicAboutComponent},
       {path: 'share-problems', component: PublicShareProblemsComponent},
       {path: 'problems', component: PublicProblemsComponent},
-      {path: 'share-idea', component: PublicShareIdeaComponent},
-      {path: 'ideas', component: PublicIdeasComponent},
+      // {path: 'share-idea', component: PublicShareIdeaComponent},
+      // {path: 'ideas', component: PublicIdeasComponent},
       // {path: 'hacks', component: PublicHacksInfoComponent},
     ]
   },

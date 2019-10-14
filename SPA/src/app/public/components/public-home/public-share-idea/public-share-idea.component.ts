@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { ImageFormStructure } from 'src/app/shared/form-data-structures/image-form-structure';
 import { AppToken } from 'src/app/core/app-domain/app-token';
 import { Subscription } from 'rxjs';
-import { ProblemService } from 'src/app/shared/_services/problem.service';
 import { ToasterService } from 'src/app/shared/_services/toaster.service';
 import { IAppState } from 'src/app/core/state-management/store';
 import { LocationService } from 'src/app/shared/_services/location.service';
 import { Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
 import { MatDialog } from '@angular/material';
-import { UserActionConstant } from 'src/app/core/state-management/user-state/user-action-constant';
 import { finalize } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { TermsAndConditionComponent } from 'src/app/shared/_modals/terms-and-condition/terms-and-condition.component';
 import { ShareIdeaFormStructure } from 'src/app/shared/form-data-structures/share-idea-form-structure';
+import { IdeaService } from 'src/app/shared/_services/idea.service';
 
 @Component({
   selector: 'app-public-share-idea',
@@ -35,7 +34,7 @@ export class PublicShareIdeaComponent implements OnInit {
   userSubScription: Subscription;
 
   constructor(
-    private problemService: ProblemService,
+    private ideaService: IdeaService,
     private toasterService: ToasterService,
     private router: Router,
     private redux: NgRedux<IAppState>,
@@ -49,21 +48,22 @@ export class PublicShareIdeaComponent implements OnInit {
     this.getCountries();
   }
 
-  createProblem() {
+  createIdea() {
 
   this.uploadingProblem = true;
 
-  this.problemService.save(this.ShareIdeaFormData.data)
+  this.ideaService.save(this.ShareIdeaFormData.data)
     .pipe(finalize(() => this.uploadingProblem = false))
     .subscribe((token: any) => {
-      this.toasterService.success('Thanks, Your problem has been shared. You can also view other problems');
+      this.toasterService.success('Thanks, Your idea has been shared. You can also view other ideas');
+      console.log(token);
 
-      if (token) {
-        this.redux.dispatch({ type: UserActionConstant.SAVE_AUTH_USER, token: token.token });
-      }
+      // if (token) {
+      //   this.redux.dispatch({ type: UserActionConstant.SAVE_AUTH_USER, token: token.token });
+      // }
 
-      this.ShareIdeaFormData.data = Object.assign({});
-      this.router.navigate(['problems']);
+      // this.ShareIdeaFormData.data = Object.assign({});
+      // this.router.navigate(['ideas']);
     });
   }
 
@@ -118,7 +118,6 @@ export class PublicShareIdeaComponent implements OnInit {
       this.ShareIdeaFormData.states = [];
       return;
     }
-    console.log(country);
 
     this.loadingState = true;
 

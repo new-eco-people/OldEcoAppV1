@@ -76,6 +76,7 @@ namespace API
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IIdeaRepository, IdeaRepository>();
+            services.AddScoped<IIdeaPostRepository, IdeaPostRepository>();
             // services.AddScoped<IUserRepository, UserRepository>();
 
             //Email Sender

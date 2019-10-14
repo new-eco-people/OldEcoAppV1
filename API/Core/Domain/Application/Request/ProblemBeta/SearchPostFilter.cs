@@ -2,7 +2,7 @@ using API.Core.Domain.Application.Request.Generic;
 
 namespace API.Core.Domain.Models.Application.Request.ProblemBeta
 {
-    public class ProblemBetaFilter : QueryResult
+    public class SearchPostFilter : QueryResult
     {
         public string Name { get; set; }
         public int? CountryId { get; set; }

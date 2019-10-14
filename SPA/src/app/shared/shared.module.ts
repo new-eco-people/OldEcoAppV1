@@ -55,6 +55,7 @@ import { PublicShareIdeaComponent } from '../public/components/public-home/publi
 import { PublicIdeasComponent } from '../public/components/public-home/public-ideas/public-ideas.component';
 import { ShareIdeaFormStructure } from './form-data-structures/share-idea-form-structure';
 import { NavigateFormComponent } from '../public/components/navigate-form/navigate-form.component';
+import { IdeaService } from './_services/idea.service';
 
 
 
@@ -107,7 +108,8 @@ import { NavigateFormComponent } from '../public/components/navigate-form/naviga
         LocationService,
         ShareProblemFormStructure,
         ShareIdeaFormStructure,
-        CommentService
+        CommentService,
+        IdeaService
     ],
 
     imports: [
